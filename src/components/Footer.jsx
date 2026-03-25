@@ -41,7 +41,7 @@ export default function Footer() {
             <h4>{t('footer.contactTitle')}</h4>
             <ul className="footer-links">
               <li>📧 help@aureo-studio.com</li>
-              <li>📱 +971 XX XXX XXXX</li>
+              <li>📱 +971 54 339 7190</li>
               <li>📍 Dubai, UAE</li>
             </ul>
             <Link to="/contact" className="btn btn-outline" style={{ marginTop: '16px', padding: '10px 20px', fontSize: '13px' }}>

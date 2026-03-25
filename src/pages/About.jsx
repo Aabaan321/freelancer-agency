@@ -2,16 +2,19 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { FadeIn, StaggerContainer, StaggerItem } from '../components/ScrollAnimations';
 
+import aabaanImg from '../assets/aabaan.jpeg';
+import shubhanImg from '../assets/shubhan.jpeg';
+
 const founders = [
-  { name: '[Your Name]', role: 'Co-Founder & Lead Developer', tag: 'CODE & ARCHITECTURE', initials: '✦',
+  { name: 'Shubhan Naik', role: 'CEO & Board of Director', tag: 'LEADERSHIP & STRATEGY', initials: 'SN', image: shubhanImg,
+    bio: "Leads the overall vision and strategy for Luxe Studio. Ensures every project aligns with the highest standards of quality and client satisfaction.",
+    skills: ['Leadership', 'Strategy', 'Client Relations', 'Vision'] },
+  { name: 'Aabaan Rahil Ghaffar', role: 'CTO & Board of Director', tag: 'CODE & ARCHITECTURE', initials: 'AG', image: aabaanImg,
     bio: "Responsible for all front-end and back-end development. Turns designs into fast, clean, production-grade websites. Obsessed with performance and code quality.",
     skills: ['React', 'Next.js', 'Node.js', 'UI Dev'] },
-  { name: '[Friend 2 Name]', role: 'Co-Founder & Creative Director', tag: 'DESIGN & UX', initials: '✦',
-    bio: "Leads all UI/UX design and visual identity work. Creates the look and feel that makes clients say 'this is exactly what I wanted' — even before they knew what they wanted.",
-    skills: ['Figma', 'Branding', 'UI Design', 'Framer'] },
-  { name: '[Friend 3 Name]', role: 'Co-Founder & Growth Lead', tag: 'MARKETING & SALES', initials: '✦',
+  { name: 'Abhay Shetty', role: 'CSO & Board of Director', tag: 'SALES & OPERATIONS', initials: 'AS', image: null,
     bio: "Handles all client outreach, marketing strategy, and business development. The reason you found us — and the person who will make sure you're found too.",
-    skills: ['SEO', 'Outreach', 'Strategy', 'Social'] },
+    skills: ['Operations', 'Sales', 'Strategy', 'Process'] },
 ];
 
 export default function About() {
@@ -75,7 +78,13 @@ export default function About() {
             {founders.map((f, i) => (
               <FadeIn key={i} delay={i * 0.1}>
                 <div className="glass-card founder-card">
-                  <div className="photo">{f.initials}</div>
+                  {f.image ? (
+                    <div className="photo" style={{ padding: 0, overflow: 'hidden' }}>
+                      <img src={f.image} alt={f.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </div>
+                  ) : (
+                    <div className="photo">{f.initials}</div>
+                  )}
                   <div>
                     <h3>{f.name}</h3>
                     <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>{f.role}</p>

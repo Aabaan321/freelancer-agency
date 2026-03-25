@@ -9,9 +9,10 @@ import { useCurrency } from '../context/CurrencyContext';
 
 import aabaanImg from '../assets/aabaan.jpeg';
 import shubhanImg from '../assets/shubhan.jpeg';
+import abhayImg from '../assets/abhay.jpeg';
 
 const TEAM = {
-  abhay: { name: "Abhay Shetty", role: "Co-Founder & CSO — Client Relations", number: "+971543397190", avatar: "AS", image: null },
+  abhay: { name: "Abhay Shetty", role: "Co-Founder & CSO — Client Relations", number: "+971543397190", avatar: "AS", image: abhayImg },
   aabaan: { name: "Aabaan Rahil Ghaffar", role: "Co-Founder & CTO — Technical", number: "+971551212310", avatar: "ARG", image: aabaanImg },
   shubhan: { name: "Shubhan Naik", role: "Co-Founder & CEO — General", number: "+971529910516", avatar: "SN", image: shubhanImg },
 };

@@ -4,6 +4,7 @@ import { FadeIn, StaggerContainer, StaggerItem } from '../components/ScrollAnima
 import { useTranslation } from 'react-i18next';
 import aabaanImg from '../assets/aabaan.jpeg';
 import shubhanImg from '../assets/shubhan.jpeg';
+import abhayImg from '../assets/abhay.jpeg';
 
 export default function About() {
   const { t } = useTranslation();
@@ -11,7 +12,7 @@ export default function About() {
   const founders = [
     { name: t('about.founder1Name'), role: t('about.founder1Role'), tag: t('about.founder1Tag'), bio: t('about.founder1Bio'), image: shubhanImg, skills: ['Full-Stack Developer', 'Frontend UI/UX', 'Business Strategy', 'Team Leadership'] },
     { name: t('about.founder2Name'), role: t('about.founder2Role'), tag: t('about.founder2Tag'), bio: t('about.founder2Bio'), image: aabaanImg, skills: ['Full-Stack Developer', 'System Architecture', 'Technical Strategy', 'Project Planning'] },
-    { name: t('about.founder3Name'), role: t('about.founder3Role'), tag: t('about.founder3Tag'), bio: t('about.founder3Bio'), image: null, initials: 'AS', skills: ['Client Relations', 'Sales', 'Strategy', 'Operations'] },
+    { name: t('about.founder3Name'), role: t('about.founder3Role'), tag: t('about.founder3Tag'), bio: t('about.founder3Bio'), image: abhayImg, skills: ['Client Relations', 'Sales', 'Strategy', 'Operations'] },
   ];
 
   return (

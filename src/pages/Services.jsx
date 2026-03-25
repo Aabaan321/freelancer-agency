@@ -1,49 +1,33 @@
 import { Link } from 'react-router-dom';
 import { Code, Layers, TrendingUp, ArrowRight, Check } from 'lucide-react';
 import { FadeIn, StaggerContainer, StaggerItem } from '../components/ScrollAnimations';
-
-const services = [
-  {
-    tag: '01 — Web Development', title: "Websites Built to Convert, Not Just to Look Pretty.",
-    body: "We build every website from scratch — no page builders, no bloated themes. Every project is coded with React, Next.js, and Tailwind CSS for blazing performance, full SEO readiness, and mobile-first responsiveness. Your site will load fast, rank well, and actually convert visitors into paying customers.",
-    includes: ['Custom design (no templates)', 'Mobile responsive (all screen sizes)', 'Fast loading (optimised assets, clean code)', 'SEO foundations built in', 'Contact forms & integrations', 'CMS setup (if needed)', 'Post-launch support (30 days)'],
-    price: 'AED 1,000', timeline: '1–3 weeks',
-    tools: ['React', 'Next.js', 'Tailwind', 'Framer Motion', 'Vercel'],
-    icon: <Code size={40} />,
-  },
-  {
-    tag: '02 — Design & Branding', title: 'Design That Makes Your Brand Look Worth 10x More.',
-    body: "We design every page in Figma first — full desktop and mobile layouts with interactive prototypes. From wireframes to final brand identity, we obsess over every pixel so your business looks polished, premium, and unforgettable. You review and approve everything before we write a single line of code.",
-    includes: ['Full UI/UX design in Figma', 'Brand identity & visual direction', 'Interactive prototypes', 'Component design system', 'Mobile-first layout design', 'Revision rounds included', 'Design handoff documentation'],
-    price: 'AED 800', timeline: '1–2 weeks',
-    tools: ['Figma', 'Adobe Suite', 'Framer'],
-    icon: <Layers size={40} />,
-  },
-  {
-    tag: '03 — Marketing & Growth', title: 'Get Found. Get Leads. Get Results.',
-    body: "A beautiful website that nobody visits is just art. We handle SEO strategy, social media presence, and outreach campaigns that drive real, qualified leads to your business. From Google rankings to Instagram growth — we make sure the right people find you.",
-    includes: ['SEO audit & strategy', 'Google Business optimisation', 'Social media strategy', 'Content planning', 'Outreach campaigns', 'Monthly performance reports', 'Ongoing consulting'],
-    price: 'AED 600', timeline: '/month',
-    tools: ['Google Analytics', 'SEMrush', 'Notion', 'Meta Ads'],
-    icon: <TrendingUp size={40} />,
-  },
-];
-
-const tiers = [
-  { name: 'Starter', price: 'AED 1,000', features: ['1–3 page website', 'Basic UI design', 'Mobile responsive', 'Contact form', '2 revision rounds', '2 weeks delivery'] },
-  { name: 'Growth', price: 'AED 2,500', popular: true, features: ['Up to 7 pages', 'Custom UI/UX design', 'SEO foundations', 'CMS integration', 'Animations & interactions', '3 weeks delivery', '30-day support'] },
-  { name: 'Premium', price: 'Custom Quote', features: ['Unlimited pages', 'Full brand identity', 'Marketing strategy', 'Advanced features', 'Ongoing retainer available', 'Priority support'] },
-];
+import { useTranslation } from 'react-i18next';
+import { useCurrency } from '../context/CurrencyContext';
 
 export default function Services() {
+  const { t } = useTranslation();
+  const { convert } = useCurrency();
+
+  const services = [
+    { tag: t('services.svc1Tag'), title: t('services.svc1Title'), body: t('services.svc1Body'), includes: t('services.svc1Includes', { returnObjects: true }), price: convert(1000), timeline: t('services.svc1Timeline'), tools: ['React', 'Next.js', 'Tailwind', 'Framer Motion', 'Vercel'], icon: <Code size={40} /> },
+    { tag: t('services.svc2Tag'), title: t('services.svc2Title'), body: t('services.svc2Body'), includes: t('services.svc2Includes', { returnObjects: true }), price: convert(800), timeline: t('services.svc2Timeline'), tools: ['Figma', 'Adobe Suite', 'Framer'], icon: <Layers size={40} /> },
+    { tag: t('services.svc3Tag'), title: t('services.svc3Title'), body: t('services.svc3Body'), includes: t('services.svc3Includes', { returnObjects: true }), price: convert(600), timeline: t('services.svc3Timeline'), tools: ['Google Analytics', 'SEMrush', 'Notion', 'Meta Ads'], icon: <TrendingUp size={40} /> },
+  ];
+
+  const tiers = [
+    { name: t('services.starter'), price: convert(1000), features: t('services.starterFeatures', { returnObjects: true }) },
+    { name: t('services.growth'), price: convert(2500), popular: true, features: t('services.growthFeatures', { returnObjects: true }) },
+    { name: t('services.premium'), price: t('services.customQuote'), features: t('services.premiumFeatures', { returnObjects: true }) },
+  ];
+
   return (
     <>
       <section className="page-hero">
         <div className="container">
-          <FadeIn><span className="label">What We Offer</span></FadeIn>
-          <FadeIn delay={0.1}><h1>Our Services</h1></FadeIn>
-          <FadeIn delay={0.2}><p>Three core disciplines. One focused team. Premium results across the board.</p></FadeIn>
-          <div className="breadcrumb"><Link to="/">Home</Link> <span>/</span> <span>Services</span></div>
+          <FadeIn><span className="label">{t('services.heroLabel')}</span></FadeIn>
+          <FadeIn delay={0.1}><h1>{t('services.heroTitle')}</h1></FadeIn>
+          <FadeIn delay={0.2}><p>{t('services.heroSubtitle')}</p></FadeIn>
+          <div className="breadcrumb"><Link to="/">{t('nav.home')}</Link> <span>/</span> <span>{t('nav.services')}</span></div>
         </div>
       </section>
 
@@ -57,20 +41,20 @@ export default function Services() {
                   <h2>{svc.title}</h2>
                   <p>{svc.body}</p>
                   <ul className="includes-list">
-                    {svc.includes.map((item, j) => (
+                    {(Array.isArray(svc.includes) ? svc.includes : []).map((item, j) => (
                       <li key={j}><span className="dot" />{item}</li>
                     ))}
                   </ul>
                   <div className="pricing-card">
                     <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                      <span style={{ fontSize: '14px', color: 'var(--text-muted)' }}>Starting from</span>
+                      <span style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('services.startingFrom')}</span>
                       <span className="price">{svc.price}</span>
                     </div>
-                    <div className="timeline-info">Timeline: {svc.timeline}</div>
-                    <Link to="/contact" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>Get a Custom Quote <ArrowRight size={14} /></Link>
+                    <div className="timeline-info">{t('services.timeline')}: {svc.timeline}</div>
+                    <Link to="/contact" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>{t('services.getCustomQuote')} <ArrowRight size={14} /></Link>
                   </div>
                   <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '20px' }}>
-                    {svc.tools.map(t => <span key={t} style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', padding: '4px 10px', borderRadius: '4px', background: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)' }}>{t}</span>)}
+                    {svc.tools.map(tl => <span key={tl} style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', padding: '4px 10px', borderRadius: '4px', background: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)' }}>{tl}</span>)}
                   </div>
                 </div>
               </FadeIn>
@@ -84,24 +68,23 @@ export default function Services() {
         </section>
       ))}
 
-      {/* Pricing */}
       <section className="section">
         <div className="container">
-          <FadeIn><h2 style={{ textAlign: 'center', marginBottom: '16px' }}>Simple, Transparent Pricing</h2></FadeIn>
-          <FadeIn delay={0.1}><p style={{ textAlign: 'center', maxWidth: '500px', margin: '0 auto 56px' }}>No hidden fees. No surprises. Just honest pricing for premium work.</p></FadeIn>
+          <FadeIn><h2 style={{ textAlign: 'center', marginBottom: '16px' }}>{t('services.pricingTitle')}</h2></FadeIn>
+          <FadeIn delay={0.1}><p style={{ textAlign: 'center', maxWidth: '500px', margin: '0 auto 56px' }}>{t('services.pricingSubtitle')}</p></FadeIn>
           <StaggerContainer className="pricing-grid">
             {tiers.map((tier, i) => (
               <StaggerItem key={i}>
                 <div className={`pricing-tier${tier.popular ? ' popular' : ''}`}>
-                  {tier.popular && <div className="badge">Most Popular</div>}
+                  {tier.popular && <div className="badge">{t('services.mostPopular')}</div>}
                   <h3>{tier.name}</h3>
                   <div className="price">{tier.price}</div>
                   <ul>
-                    {tier.features.map((f, j) => (
+                    {(Array.isArray(tier.features) ? tier.features : []).map((f, j) => (
                       <li key={j}><Check size={16} className="check" />{f}</li>
                     ))}
                   </ul>
-                  <Link to="/contact" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>Get Started <ArrowRight size={14} /></Link>
+                  <Link to="/contact" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>{t('services.getStarted')} <ArrowRight size={14} /></Link>
                 </div>
               </StaggerItem>
             ))}

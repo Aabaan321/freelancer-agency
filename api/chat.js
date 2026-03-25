@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const { messages } = req.body;
+  const { messages, currency, language } = req.body;
 
   if (!messages || !Array.isArray(messages)) {
     return res.status(400).json({ error: 'Messages array required' });
@@ -16,10 +16,18 @@ export default async function handler(req, res) {
 
   const OPENAI_API_KEY = process.env.VITE_OPENAI_API_KEY || process.env.OPENAI_API_KEY;
 
+  const currencyNote = currency && currency !== 'AED'
+    ? `\nIMPORTANT: The user has selected ${currency} as their preferred currency. Always quote prices in ${currency} instead of AED. Convert using approximate rates.`
+    : '';
+
+  const languageNote = language && language !== 'en'
+    ? `\nIMPORTANT: The user has selected "${language}" as their preferred language. Respond in that language automatically.`
+    : '';
+
   const SYSTEM_PROMPT = `You are the friendly, professional AI assistant for Luxe Studio, a premium boutique digital agency based in Dubai, UAE. You speak on behalf of the agency and help potential clients get answers quickly.
 
 ABOUT THE AGENCY:
-- A 3-founder team: one lead developer, one UI/UX designer, and one marketing & sales expert
+- Co-Founders: Shubhan Naik (CEO, Full-Stack Developer), Aabaan Rahil Ghaffar (CTO, Lead Web Developer & Technical Architect), Abhay Shetty (CSO, Client Relations & Business Development)
 - Specialises in: custom website development, UI/UX design, and digital marketing
 - Pricing starts at AED 1,000 — 40 to 50% below typical agency rates
 - Maximum 5 clients accepted at any one time
@@ -44,8 +52,7 @@ HOW TO BEHAVE:
 - Never make up information or invent prices not listed above
 - Do not discuss competitors
 - Always end responses that involve next steps with a nudge to book a call or visit the Contact page
-- Respond in the same language the user writes in (English or Arabic)
-- You are not a general assistant — only answer questions relevant to the agency, its services, pricing, process, and team`;
+- You are not a general assistant — only answer questions relevant to the agency, its services, pricing, process, and team${currencyNote}${languageNote}`;
 
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {

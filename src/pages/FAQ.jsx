@@ -3,30 +3,34 @@ import { Link } from 'react-router-dom';
 import { ChevronDown, ArrowRight } from 'lucide-react';
 import { FadeIn } from '../components/ScrollAnimations';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const faqs = [
-  { q: "How much does a website cost?", a: "Our projects start at AED 1,000 for a clean, professional landing page. Pricing scales based on pages, features, and complexity. We're always 40–50% below what a typical agency would charge for the same quality. We'll give you a clear quote after a free discovery call." },
-  { q: "How long does a project take?", a: "Most websites are delivered in 2–4 weeks. Simpler projects can be done in under 2 weeks. We'll give you a clear timeline before we start." },
-  { q: "Why only 5 clients at a time?", a: "Because we refuse to compromise on quality. When you work with us, you're not one of 50 clients. You're one of 5. That means faster communication, more attention to detail, and a better final product." },
-  { q: "Do you use templates or page builders?", a: "Never. Every website we build is custom-coded from scratch using React, Next.js, and Tailwind CSS. No Wix, no WordPress templates, no drag-and-drop shortcuts." },
-  { q: "Will my website work on mobile?", a: "Yes — fully responsive design is standard on every single project we deliver. We test on all major screen sizes and devices." },
-  { q: "What happens after the website launches?", a: "We provide 30 days of post-launch support for all projects. Any bugs, tweaks, or small updates during that period are handled at no extra cost." },
-  { q: "Can you help with content (text and images)?", a: "We can guide you on content structure and copywriting direction. For photography, we recommend using professional stock photography or your own brand images, which we'll help you select." },
-  { q: "How do I get started?", a: "Simply book a free 30-minute call using the Contact page. We'll discuss your project, answer any questions, and tell you if we're a good fit." },
-  { q: "Do you offer ongoing maintenance?", a: "Yes. We offer monthly maintenance retainers for updates, security, and performance monitoring. Pricing starts at AED 200/month." },
-  { q: "Are you based in Dubai?", a: "Yes — we're a Dubai-based team! However, we work with clients across the UAE and internationally via Zoom/Google Meet." }
-];
+import { useTranslation } from 'react-i18next';
+import { useCurrency } from '../context/CurrencyContext';
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
+  const { t } = useTranslation();
+  const { convert } = useCurrency();
+
+  const faqs = [
+    { q: t('faq.q1'), a: t('faq.a1', { price: convert(1000) }) },
+    { q: t('faq.q2'), a: t('faq.a2') },
+    { q: t('faq.q3'), a: t('faq.a3') },
+    { q: t('faq.q4'), a: t('faq.a4') },
+    { q: t('faq.q5'), a: t('faq.a5') },
+    { q: t('faq.q6'), a: t('faq.a6') },
+    { q: t('faq.q7'), a: t('faq.a7') },
+    { q: t('faq.q8'), a: t('faq.a8') },
+    { q: t('faq.q9'), a: t('faq.a9', { price: convert(200) }) },
+    { q: t('faq.q10'), a: t('faq.a10') },
+  ];
 
   return (
     <>
       <section className="page-hero">
         <div className="container">
-          <FadeIn><span className="label">Common Questions</span></FadeIn>
-          <FadeIn delay={0.1}><h1>Answers You Need.</h1></FadeIn>
-          <div className="breadcrumb"><Link to="/">Home</Link> <span>/</span> <span>FAQ</span></div>
+          <FadeIn><span className="label">{t('faq.heroLabel')}</span></FadeIn>
+          <FadeIn delay={0.1}><h1>{t('faq.heroTitle')}</h1></FadeIn>
+          <div className="breadcrumb"><Link to="/">{t('nav.home')}</Link> <span>/</span> <span>{t('nav.faq')}</span></div>
         </div>
       </section>
 
@@ -63,9 +67,9 @@ export default function FAQ() {
       <section className="section final-cta">
         <div className="container">
           <FadeIn>
-            <h2>Still Have Questions?</h2>
-            <p>Our team is ready to answer them on a quick call.</p>
-            <Link to="/contact" className="btn btn-primary">Book a Free Call <ArrowRight size={14} /></Link>
+            <h2>{t('faq.ctaTitle')}</h2>
+            <p>{t('faq.ctaDesc')}</p>
+            <Link to="/contact" className="btn btn-primary">{t('faq.bookFreeCall')} <ArrowRight size={14} /></Link>
           </FadeIn>
         </div>
       </section>

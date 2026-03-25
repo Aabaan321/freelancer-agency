@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { LANGUAGES } from './i18n';
+import { CurrencyProvider } from './context/CurrencyContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AnnouncementBar from './components/AnnouncementBar';
@@ -12,6 +15,7 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
+import './i18n';
 import './index.css';
 
 function ScrollToTop() {
@@ -50,17 +54,36 @@ function AnimatedRoutes() {
   );
 }
 
+function RTLHandler() {
+  const { i18n } = useTranslation();
+  useEffect(() => {
+    const lang = LANGUAGES.find(l => l.code === i18n.language);
+    const isRTL = lang?.rtl || false;
+    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+    document.documentElement.lang = i18n.language;
+    if (isRTL) {
+      document.body.classList.add('rtl');
+    } else {
+      document.body.classList.remove('rtl');
+    }
+  }, [i18n.language]);
+  return null;
+}
+
 export default function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <AnnouncementBar />
-      <Navbar />
-      <main>
-        <AnimatedRoutes />
-      </main>
-      <Footer />
-      <ChatWidget />
-    </Router>
+    <CurrencyProvider>
+      <Router>
+        <RTLHandler />
+        <ScrollToTop />
+        <AnnouncementBar />
+        <Navbar />
+        <main>
+          <AnimatedRoutes />
+        </main>
+        <Footer />
+        <ChatWidget />
+      </Router>
+    </CurrencyProvider>
   );
 }

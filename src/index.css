@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Cairo:wght@400;600;700&display=swap');
 
 :root {
   --bg-primary: #08080E;
@@ -1586,3 +1586,248 @@ h3 { font-size: clamp(22px, 2vw, 28px); font-weight: 600; }
 
 /* ── Selection ── */
 ::selection { background: rgba(198,168,75,0.3); color: var(--text-heading); }
+
+/* ── Switcher Dropdowns ── */
+.switcher-item {
+  position: relative;
+}
+
+.switcher-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  color: var(--text-body);
+  font-size: 13px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.switcher-btn:hover {
+  border-color: var(--border-gold);
+  background: rgba(198,168,75,0.06);
+  color: var(--gold);
+}
+
+.switcher-btn .chev {
+  transition: transform 0.2s ease;
+}
+
+.switcher-btn .chev.open {
+  transform: rotate(180deg);
+}
+
+.switcher-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: rgba(13,13,26,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: 8px;
+  min-width: 220px;
+  max-height: 360px;
+  overflow-y: auto;
+  z-index: 1100;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+}
+
+.switcher-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-body);
+  font-size: 14px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.switcher-option:hover {
+  background: rgba(198,168,75,0.08);
+  color: var(--text-heading);
+}
+
+.switcher-option.active {
+  background: rgba(198,168,75,0.12);
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.switcher-option .flag {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.switcher-option .code {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* ── Mobile Switchers ── */
+.mobile-switchers {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  width: 80%;
+  max-width: 380px;
+}
+
+.mobile-switcher {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mobile-switcher-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.mobile-switcher select {
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  color: var(--text-heading);
+  font-size: 14px;
+  font-family: var(--font-body);
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.mobile-switcher select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+/* ── RTL Support (Arabic/Urdu) ── */
+body.rtl {
+  font-family: 'Cairo', var(--font-body);
+}
+
+body.rtl h1,
+body.rtl h2,
+body.rtl h3,
+body.rtl h4,
+body.rtl h5,
+body.rtl h6 {
+  font-family: 'Cairo', var(--font-display);
+}
+
+[dir="rtl"] .navbar .nav-links {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .navbar .nav-inner {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .breadcrumb {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .feature-list li {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+[dir="rtl"] .includes-list li {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+[dir="rtl"] .pricing-tier ul {
+  text-align: right;
+}
+
+[dir="rtl"] .pricing-tier li {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .testimonial-card {
+  text-align: right;
+}
+
+[dir="rtl"] .testimonial-card .author {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .contact-info .detail {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+[dir="rtl"] .v-timeline {
+  padding-left: 0;
+  padding-right: 60px;
+}
+
+[dir="rtl"] .v-timeline::before {
+  left: auto;
+  right: 20px;
+}
+
+[dir="rtl"] .v-step::before {
+  left: auto;
+  right: -48px;
+}
+
+[dir="rtl"] .v-step {
+  text-align: right;
+}
+
+[dir="rtl"] .switcher-dropdown {
+  right: auto;
+  left: 0;
+}
+
+[dir="rtl"] .switcher-option {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+[dir="rtl"] .founder-card {
+  text-align: right;
+}
+
+[dir="rtl"] .btn {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .announcement-bar .pulse-dot {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+[dir="rtl"] .announcement-bar .close-btn {
+  right: auto;
+  left: 16px;
+}
+
+@media (max-width: 900px) {
+  [dir="rtl"] .navbar .nav-inner {
+    flex-direction: row;
+  }
+}
+

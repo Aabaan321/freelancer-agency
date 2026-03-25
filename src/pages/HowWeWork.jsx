@@ -1,43 +1,33 @@
 import { Link } from 'react-router-dom';
 import { Phone, Map, PenTool, Code, CheckCircle, Rocket, ArrowRight } from 'lucide-react';
 import { FadeIn, StaggerContainer, StaggerItem } from '../components/ScrollAnimations';
-
-const steps = [
-  { num: 'STEP 01', icon: <Phone size={24} />, title: 'We Start by Listening.', day: 'Day 1', duration: '30–60 mins',
-    body: "Every project begins with a free 30-minute call. We want to understand your business, your audience, your goals, and what success looks like for you. No templates. No assumptions.",
-    deliverables: 'Project brief, scope of work, timeline' },
-  { num: 'STEP 02', icon: <Map size={24} />, title: 'We Build the Blueprint.', day: 'Days 2–3', duration: '1–2 days',
-    body: "Once we understand your goals, we create a full project roadmap — sitemap, content structure, and technical plan. You see and approve everything before we touch any design.",
-    deliverables: 'Sitemap, content plan, tech stack decision' },
-  { num: 'STEP 03', icon: <PenTool size={24} />, title: 'Pixel-Perfect Design in Figma.', day: 'Days 4–9', duration: '4–5 days',
-    body: "We design every page in Figma first. Full desktop and mobile layouts. You get a live Figma link to review, comment, and approve. We don't move to development until you love it.",
-    deliverables: 'Full Figma prototype, revision rounds' },
-  { num: 'STEP 04', icon: <Code size={24} />, title: 'Clean Code. Zero Shortcuts.', day: 'Days 10–18', duration: '7–9 days',
-    body: "We build your site from scratch — no page builders, no bloated plugins. Custom React components, optimised for speed, SEO, and mobile performance.",
-    deliverables: 'Staged preview link, testing on all devices' },
-  { num: 'STEP 05', icon: <CheckCircle size={24} />, title: "You're In Full Control.", day: 'Days 19–21', duration: '2–3 days',
-    body: "We share a live staging link. You review everything. We make your requested changes. This process repeats until you're 100% satisfied.",
-    deliverables: 'Revised staging site, client sign-off' },
-  { num: 'STEP 06', icon: <Rocket size={24} />, title: 'We Go Live — Together.', day: 'Day 22–28', duration: 'Launch week',
-    body: "Once you approve, we handle full deployment — domain connection, SSL, speed optimisation, and final SEO setup. We stay on call for 30 days post-launch.",
-    deliverables: 'Live website, handover doc, 30-day support' },
-];
+import { useTranslation } from 'react-i18next';
 
 const tools = ['Figma', 'React', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'Vercel', 'GitHub', 'Notion', 'Google Analytics', 'Calendly'];
 
 export default function HowWeWork() {
+  const { t } = useTranslation();
+
+  const steps = [
+    { num: t('howWeWork.step1Num'), icon: <Phone size={24} />, title: t('howWeWork.step1Title'), day: t('howWeWork.step1Day'), duration: t('howWeWork.step1Duration'), body: t('howWeWork.step1Body'), deliverables: t('howWeWork.step1Deliverables') },
+    { num: t('howWeWork.step2Num'), icon: <Map size={24} />, title: t('howWeWork.step2Title'), day: t('howWeWork.step2Day'), duration: t('howWeWork.step2Duration'), body: t('howWeWork.step2Body'), deliverables: t('howWeWork.step2Deliverables') },
+    { num: t('howWeWork.step3Num'), icon: <PenTool size={24} />, title: t('howWeWork.step3Title'), day: t('howWeWork.step3Day'), duration: t('howWeWork.step3Duration'), body: t('howWeWork.step3Body'), deliverables: t('howWeWork.step3Deliverables') },
+    { num: t('howWeWork.step4Num'), icon: <Code size={24} />, title: t('howWeWork.step4Title'), day: t('howWeWork.step4Day'), duration: t('howWeWork.step4Duration'), body: t('howWeWork.step4Body'), deliverables: t('howWeWork.step4Deliverables') },
+    { num: t('howWeWork.step5Num'), icon: <CheckCircle size={24} />, title: t('howWeWork.step5Title'), day: t('howWeWork.step5Day'), duration: t('howWeWork.step5Duration'), body: t('howWeWork.step5Body'), deliverables: t('howWeWork.step5Deliverables') },
+    { num: t('howWeWork.step6Num'), icon: <Rocket size={24} />, title: t('howWeWork.step6Title'), day: t('howWeWork.step6Day'), duration: t('howWeWork.step6Duration'), body: t('howWeWork.step6Body'), deliverables: t('howWeWork.step6Deliverables') },
+  ];
+
   return (
     <>
       <section className="page-hero">
         <div className="container">
-          <FadeIn><span className="label">Our Approach</span></FadeIn>
-          <FadeIn delay={0.1}><h1>Our Process</h1></FadeIn>
-          <FadeIn delay={0.2}><p>Transparent. Collaborative. Obsessively detailed.</p></FadeIn>
-          <div className="breadcrumb"><Link to="/">Home</Link> <span>/</span> <span>How We Work</span></div>
+          <FadeIn><span className="label">{t('howWeWork.heroLabel')}</span></FadeIn>
+          <FadeIn delay={0.1}><h1>{t('howWeWork.heroTitle')}</h1></FadeIn>
+          <FadeIn delay={0.2}><p>{t('howWeWork.heroSubtitle')}</p></FadeIn>
+          <div className="breadcrumb"><Link to="/">{t('nav.home')}</Link> <span>/</span> <span>{t('nav.howWeWork')}</span></div>
         </div>
       </section>
 
-      {/* Timeline */}
       <section className="section">
         <div className="container">
           <div className="v-timeline">
@@ -47,7 +37,7 @@ export default function HowWeWork() {
                   <span className="step-num">{s.num} — {s.day}</span>
                   <h3>{s.title}</h3>
                   <p>{s.body}</p>
-                  <div className="deliverables">📦 Deliverables: {s.deliverables}</div>
+                  <div className="deliverables">📦 {t('howWeWork.deliverables')}: {s.deliverables}</div>
                   <span className="duration-badge">⏱ {s.duration}</span>
                 </div>
               </FadeIn>
@@ -56,15 +46,14 @@ export default function HowWeWork() {
         </div>
       </section>
 
-      {/* Communication */}
       <section className="section" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container">
-          <FadeIn><h2 style={{ textAlign: 'center', marginBottom: '56px' }}>How We Stay In Touch</h2></FadeIn>
+          <FadeIn><h2 style={{ textAlign: 'center', marginBottom: '56px' }}>{t('howWeWork.commTitle')}</h2></FadeIn>
           <StaggerContainer className="comm-grid">
             {[
-              { emoji: '🗓', title: 'Weekly Check-ins', desc: 'Short calls to keep you updated on progress and next steps.' },
-              { emoji: '💬', title: 'Direct WhatsApp', desc: 'Message the team anytime — no ticketing systems or delays.' },
-              { emoji: '📋', title: 'Project Dashboard', desc: 'See real-time progress updates with full transparency.' },
+              { emoji: '🗓', title: t('howWeWork.comm1Title'), desc: t('howWeWork.comm1Desc') },
+              { emoji: '💬', title: t('howWeWork.comm2Title'), desc: t('howWeWork.comm2Desc') },
+              { emoji: '📋', title: t('howWeWork.comm3Title'), desc: t('howWeWork.comm3Desc') },
             ].map((c, i) => (
               <StaggerItem key={i}>
                 <div className="glass-card comm-card">
@@ -78,16 +67,15 @@ export default function HowWeWork() {
         </div>
       </section>
 
-      {/* Tools */}
       <section className="section">
         <div className="container">
-          <FadeIn><h2 style={{ textAlign: 'center', marginBottom: '56px' }}>Tools We Use</h2></FadeIn>
+          <FadeIn><h2 style={{ textAlign: 'center', marginBottom: '56px' }}>{t('howWeWork.toolsTitle')}</h2></FadeIn>
           <StaggerContainer className="tools-grid">
-            {tools.map((t, i) => (
+            {tools.map((tl, i) => (
               <StaggerItem key={i}>
                 <div className="tool-item glass-card" style={{ padding: '20px 12px' }}>
                   <div className="tool-icon"><Code size={20} /></div>
-                  <span>{t}</span>
+                  <span>{tl}</span>
                 </div>
               </StaggerItem>
             ))}
@@ -95,13 +83,12 @@ export default function HowWeWork() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="section final-cta">
         <div className="container">
           <FadeIn>
-            <h2>Ready to Start Your Project?</h2>
-            <p>Book a free discovery call and let's map out your project together.</p>
-            <Link to="/contact" className="btn btn-primary">Book Your Free Call <ArrowRight size={14} /></Link>
+            <h2>{t('howWeWork.ctaTitle')}</h2>
+            <p>{t('howWeWork.ctaDesc')}</p>
+            <Link to="/contact" className="btn btn-primary">{t('howWeWork.bookYourFreeCall')} <ArrowRight size={14} /></Link>
           </FadeIn>
         </div>
       </section>

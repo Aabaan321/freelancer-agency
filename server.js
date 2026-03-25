@@ -70,7 +70,7 @@ app.post('/api/chat', async (req, res) => {
       console.error('OpenAI API error:', errorData);
       return res.status(response.status).json({
         error: 'API request failed',
-        reply: "Sorry, I'm having a moment. Please try again or contact us directly at hello@aureo.com",
+        reply: "Sorry, I'm having a moment. Please try again or contact us directly at help@aureo-studio.com",
       });
     }
 
@@ -82,7 +82,7 @@ app.post('/api/chat', async (req, res) => {
     console.error('Server error:', error);
     res.status(500).json({
       error: 'Internal server error',
-      reply: "Sorry, I'm having a moment. Please try again or contact us directly at hello@aureo.com",
+      reply: "Sorry, I'm having a moment. Please try again or contact us directly at help@aureo-studio.com",
     });
   }
 });

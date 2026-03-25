@@ -12,7 +12,7 @@ export default function Footer() {
             <p style={{ fontStyle: 'italic', color: '#E8D5A3', fontSize: '14px', marginBottom: '8px' }}>{t('footer.tagline')}</p>
             <p>{t('footer.desc')}</p>
             <div className="social-links" style={{ fontSize: '13px', fontWeight: 'bold' }}>
-              <a href="#" aria-label="Instagram">IG</a>
+              <a href="https://instagram.com/aureo_studio._" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
               <a href="#" aria-label="LinkedIn">IN</a>
               <a href="#" aria-label="Twitter">X</a>
             </div>
@@ -40,7 +40,7 @@ export default function Footer() {
           <div>
             <h4>{t('footer.contactTitle')}</h4>
             <ul className="footer-links">
-              <li>📧 hello@aureo.com</li>
+              <li>📧 help@aureo-studio.com</li>
               <li>📱 +971 XX XXX XXXX</li>
               <li>📍 Dubai, UAE</li>
             </ul>

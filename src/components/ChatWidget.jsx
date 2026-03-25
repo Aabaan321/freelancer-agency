@@ -57,9 +57,9 @@ export default function ChatWidget() {
       });
 
       const data = await res.json();
-      setMessages(prev => [...prev, { role: 'assistant', content: data.reply || "Sorry, I'm having a moment. Please try again or contact us directly at hello@aureo.com", time: getTime() }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: data.reply || "Sorry, I'm having a moment. Please try again or contact us directly at help@aureo-studio.com", time: getTime() }]);
     } catch {
-      setMessages(prev => [...prev, { role: 'assistant', content: "Sorry, I'm having a moment. Please try again or contact us directly at hello@aureo.com", time: getTime() }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: "Sorry, I'm having a moment. Please try again or contact us directly at help@aureo-studio.com", time: getTime() }]);
     } finally {
       setLoading(false);
     }

@@ -102,7 +102,7 @@ export default function Contact() {
           <div className="contact-split">
             <FadeIn direction="left">
               <div className="contact-info">
-                <div className="detail"><Mail className="icon" size={20} /> <strong>{t('contact.email')}</strong> hello@aureo.com</div>
+                <div className="detail"><Mail className="icon" size={20} /> <strong>{t('contact.email')}</strong> help@aureo-studio.com</div>
                 <div className="detail"><Phone className="icon" size={20} /> <strong>{t('contact.whatsapp')}</strong> +971 54 339 7190</div>
                 <div className="detail"><MapPin className="icon" size={20} /> <strong>{t('contact.location')}</strong> {t('contact.locationValue')}</div>
                 <div className="detail"><Clock className="icon" size={20} /> <strong>{t('contact.responseTime')}</strong> {t('contact.responseValue')}</div>

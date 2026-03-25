@@ -5,7 +5,7 @@ import { X, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { LANGUAGES } from '../i18n';
 import { useCurrency } from '../context/CurrencyContext';
-import aureoLogo from '../assets/aureo.jpeg';
+import aureonLogo from '../assets/aureon.jpeg';
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
@@ -52,7 +52,7 @@ export default function Navbar() {
 
   const changeLang = (code) => {
     i18n.changeLanguage(code);
-    localStorage.setItem('aureo_lang', code);
+    localStorage.setItem('aureon_lang', code);
     setLangOpen(false);
   };
 
@@ -66,7 +66,7 @@ export default function Navbar() {
       <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
         <div className="nav-inner">
           <Link to="/" className="logo">
-            <img src={aureoLogo} alt="Aureo" style={{ height: 'clamp(32px, 4vw, 44px)', width: 'auto', display: 'block', borderRadius: '4px' }} />
+            <img src={aureonLogo} alt="Aureon" style={{ height: 'clamp(32px, 4vw, 44px)', width: 'auto', display: 'block', borderRadius: '4px' }} />
           </Link>
           <ul className="nav-links">
             {links.map(l => (

@@ -243,7 +243,7 @@
     "founder2Name": "Aabaan Rahil Ghaffar",
     "founder2Role": "Co-Founder, CTO & Board of Director",
     "founder2Tag": "TECHNICAL ARCHITECTURE & AI SYSTEMS",
-    "founder2Bio": "Aabaan is the technical backbone of Aureo — and one of the few developers his age who has actually built and deployed full AI systems in the real world. From AI platforms and voice agents to multi-agent automation systems, he architects everything from the ground up. If it's fast, smart, and built to last — that's Aabaan's work.",
+    "founder2Bio": "Aabaan is the technical backbone of Aureon — and one of the few developers his age who has actually built and deployed full AI systems in the real world. From AI platforms and voice agents to multi-agent automation systems, he architects everything from the ground up. If it's fast, smart, and built to last — that's Aabaan's work.",
     "founder3Name": "Abhay Shetty",
     "founder3Role": "联合创始人、CSO",
     "founder3Tag": "客户关系",
@@ -385,7 +385,7 @@
     "digitalMarketing": "数字营销",
     "contactTitle": "联系",
     "bookFreeCall": "预约",
-    "copyright": "© 2026 Aureo"
+    "copyright": "© 2026 Aureon"
   },
   "chat": {
     "greeting": "您好！👋 我是AI助手。",
@@ -446,7 +446,7 @@
       "Make your existing tools 10x more powerful"
     ],
     "specialistTitle": "Meet Our AI Specialist.",
-    "specialistBody": "All AI and automation work at Aureo is led by Aabaan Rahil Ghaffar — Co-Founder & CTO. Aabaan has built full AI platforms, voice agents, multi-agent systems, and intelligent automation tools from the ground up. When you work with us on AI, you're working directly with someone who has actually built these systems — not someone who just read about them.",
+    "specialistBody": "All AI and automation work at Aureon is led by Aabaan Rahil Ghaffar — Co-Founder & CTO. Aabaan has built full AI platforms, voice agents, multi-agent systems, and intelligent automation tools from the ground up. When you work with us on AI, you're working directly with someone who has actually built these systems — not someone who just read about them.",
     "specialistCta": "Talk to Aabaan →"
   }
 }

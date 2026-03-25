@@ -57,9 +57,9 @@ export default function ChatWidget() {
       });
 
       const data = await res.json();
-      setMessages(prev => [...prev, { role: 'assistant', content: data.reply || "Sorry, I'm having a moment. Please try again or contact us directly at help@aureo-studio.com", time: getTime() }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: data.reply || "Sorry, I'm having a moment. Please try again or contact us directly at help@aureon-studio.com", time: getTime() }]);
     } catch {
-      setMessages(prev => [...prev, { role: 'assistant', content: "Sorry, I'm having a moment. Please try again or contact us directly at help@aureo-studio.com", time: getTime() }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: "Sorry, I'm having a moment. Please try again or contact us directly at help@aureon-studio.com", time: getTime() }]);
     } finally {
       setLoading(false);
     }
@@ -91,7 +91,7 @@ export default function ChatWidget() {
             <div className="chat-header">
               <div className="chat-logo"><Sparkles size={18} /></div>
               <div className="info">
-                <h4>Aureo <span style={{ fontWeight: 400, fontSize: '12px', color: '#9A9AB0' }}>{t('chat.aiAssistant')}</span></h4>
+                <h4>Aureon <span style={{ fontWeight: 400, fontSize: '12px', color: '#9A9AB0' }}>{t('chat.aiAssistant')}</span></h4>
                 <span><span className="online-dot" /> {t('chat.onlineNow')}</span>
               </div>
               <button className="close-chat" onClick={() => setOpen(false)}><X size={20} /></button>

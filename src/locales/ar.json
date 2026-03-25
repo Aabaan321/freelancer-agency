@@ -223,10 +223,10 @@
   "about": {
     "heroLabel": "قصتنا",
     "heroTitle": "لسنا وكالة. نحن بُناة.",
-    "storyP1": "أسسنا Aureo لأننا سئمنا من رؤية الشركات الصغيرة تدفع أكثر من اللازم مقابل مواقع تبدو مثل غيرها. نحن فريق من ثلاثة أصدقاء مهووسين بالجودة والعدالة والعمل الذي نفخر به.",
+    "storyP1": "أسسنا Aureon لأننا سئمنا من رؤية الشركات الصغيرة تدفع أكثر من اللازم مقابل مواقع تبدو مثل غيرها. نحن فريق من ثلاثة أصدقاء مهووسين بالجودة والعدالة والعمل الذي نفخر به.",
     "storyP2": "نحافظ على قائمة عملائنا صغيرة عمداً. نفضل أن نفعل 5 أشياء بإتقان بدلاً من 50 شيئاً بشكل سيء.",
     "quote": "\"نفضل أن نفعل 5 أشياء بإتقان بدلاً من 50 شيئاً بشكل سيء.\"",
-    "quoteAttrib": "— المؤسسون، Aureo",
+    "quoteAttrib": "— المؤسسون، Aureon",
     "valuesTitle": "ما نمثله",
     "value1Title": "الجودة فوق الكمية",
     "value1Desc": "نحد من عدد العملاء ليحصل كل مشروع على كامل اهتمامنا. بدون استعجال أو تقصير.",
@@ -239,11 +239,11 @@
     "founder1Name": "شعبان نايك",
     "founder1Role": "المؤسس المشارك، الرئيس التنفيذي وعضو مجلس الإدارة",
     "founder1Tag": "التطوير والقيادة",
-    "founder1Bio": "شعبان هو القوة الدافعة وراء Aureo. مطور متكامل ومؤسس مشارك، يقود رؤية الشركة مع البقاء منخرطاً في كل مشروع.",
+    "founder1Bio": "شعبان هو القوة الدافعة وراء Aureon. مطور متكامل ومؤسس مشارك، يقود رؤية الشركة مع البقاء منخرطاً في كل مشروع.",
     "founder2Name": "أعبان رحيل غفار",
     "founder2Role": "Co-Founder, CTO & Board of Director",
     "founder2Tag": "TECHNICAL ARCHITECTURE & AI SYSTEMS",
-    "founder2Bio": "Aabaan is the technical backbone of Aureo — and one of the few developers his age who has actually built and deployed full AI systems in the real world. From AI platforms and voice agents to multi-agent automation systems, he architects everything from the ground up. If it's fast, smart, and built to last — that's Aabaan's work.",
+    "founder2Bio": "Aabaan is the technical backbone of Aureon — and one of the few developers his age who has actually built and deployed full AI systems in the real world. From AI platforms and voice agents to multi-agent automation systems, he architects everything from the ground up. If it's fast, smart, and built to last — that's Aabaan's work.",
     "founder3Name": "أبهاي شيتي",
     "founder3Role": "المؤسس المشارك، مدير الاستراتيجية وعضو مجلس الإدارة",
     "founder3Tag": "علاقات العملاء والعمليات",
@@ -385,10 +385,10 @@
     "digitalMarketing": "التسويق الرقمي",
     "contactTitle": "التواصل",
     "bookFreeCall": "احجز مكالمة مجانية",
-    "copyright": "© 2026 Aureo. صُنع بدقة."
+    "copyright": "© 2026 Aureon. صُنع بدقة."
   },
   "chat": {
-    "greeting": "مرحباً! 👋 أنا المساعد الذكي لـ Aureo. اسألني أي شيء عن خدماتنا وأسعارنا وعمليتنا!",
+    "greeting": "مرحباً! 👋 أنا المساعد الذكي لـ Aureon. اسألني أي شيء عن خدماتنا وأسعارنا وعمليتنا!",
     "qr1": "ما هي أسعاركم؟",
     "qr2": "كم يستغرق الموقع؟",
     "qr3": "ماذا تبنون؟",
@@ -446,7 +446,7 @@
       "Make your existing tools 10x more powerful"
     ],
     "specialistTitle": "Meet Our AI Specialist.",
-    "specialistBody": "All AI and automation work at Aureo is led by Aabaan Rahil Ghaffar — Co-Founder & CTO. Aabaan has built full AI platforms, voice agents, multi-agent systems, and intelligent automation tools from the ground up. When you work with us on AI, you're working directly with someone who has actually built these systems — not someone who just read about them.",
+    "specialistBody": "All AI and automation work at Aureon is led by Aabaan Rahil Ghaffar — Co-Founder & CTO. Aabaan has built full AI platforms, voice agents, multi-agent systems, and intelligent automation tools from the ground up. When you work with us on AI, you're working directly with someone who has actually built these systems — not someone who just read about them.",
     "specialistCta": "Talk to Aabaan →"
   }
 }

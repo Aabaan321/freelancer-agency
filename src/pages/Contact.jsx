@@ -31,7 +31,7 @@ function getRecommended(projectType) {
 
 function buildWhatsAppUrl(member, data) {
   const firstName = member.name.split(' ')[0];
-  let msg = `Hi ${firstName}! 👋\n\nI found Aureo and I'm interested in working together.\n\nHere are my details:\n\n👤 Name: ${data.name}\n📧 Email: ${data.email}`;
+  let msg = `Hi ${firstName}! 👋\n\nI found Aureon and I'm interested in working together.\n\nHere are my details:\n\n👤 Name: ${data.name}\n📧 Email: ${data.email}`;
   if (data.phone) msg += `\n📱 Phone: ${data.phone}`;
   msg += `\n\n🛠 Project Type: ${data.projectType || 'Not specified'}\n💰 Budget: ${data.budget || 'Not specified'}`;
   if (data.message) msg += `\n\n📝 What I'm looking for:\n${data.message}`;
@@ -102,7 +102,7 @@ export default function Contact() {
           <div className="contact-split">
             <FadeIn direction="left">
               <div className="contact-info">
-                <div className="detail"><Mail className="icon" size={20} /> <strong>{t('contact.email')}</strong> help@aureo-studio.com</div>
+                <div className="detail"><Mail className="icon" size={20} /> <strong>{t('contact.email')}</strong> help@aureon-studio.com</div>
                 <div className="detail"><Phone className="icon" size={20} /> <strong>{t('contact.whatsapp')}</strong> +971 54 339 7190</div>
                 <div className="detail"><MapPin className="icon" size={20} /> <strong>{t('contact.location')}</strong> {t('contact.locationValue')}</div>
                 <div className="detail"><Clock className="icon" size={20} /> <strong>{t('contact.responseTime')}</strong> {t('contact.responseValue')}</div>

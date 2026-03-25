@@ -223,10 +223,10 @@
   "about": {
     "heroLabel": "Our Story",
     "heroTitle": "We're Not an Agency. We're Builders.",
-    "storyP1": "We started Aureo because we were tired of seeing small businesses overpaying for websites that looked like everyone else's. We're a team of three friends who are obsessed with quality, fairness, and doing work we're actually proud of.",
+    "storyP1": "We started Aureon because we were tired of seeing small businesses overpaying for websites that looked like everyone else's. We're a team of three friends who are obsessed with quality, fairness, and doing work we're actually proud of.",
     "storyP2": "We keep our client list small on purpose. We'd rather do 5 things perfectly than 50 things badly.",
     "quote": "\"We'd rather do 5 things perfectly than 50 things badly.\"",
-    "quoteAttrib": "— The Founders, Aureo",
+    "quoteAttrib": "— The Founders, Aureon",
     "valuesTitle": "What We Stand For",
     "value1Title": "Quality Over Volume",
     "value1Desc": "We limit clients so every project gets our full attention. No rushing, no cutting corners.",
@@ -239,11 +239,11 @@
     "founder1Name": "Shubhan Naik",
     "founder1Role": "Co-Founder, CEO & Board of Director",
     "founder1Tag": "DEVELOPMENT & LEADERSHIP",
-    "founder1Bio": "Shubhan is the driving force behind Aureo. A full-stack developer and co-founder, he leads the company's vision while staying hands-on with every build. He believes great software is equal parts clean code and sharp thinking — and brings both to every project.",
+    "founder1Bio": "Shubhan is the driving force behind Aureon. A full-stack developer and co-founder, he leads the company's vision while staying hands-on with every build. He believes great software is equal parts clean code and sharp thinking — and brings both to every project.",
     "founder2Name": "Aabaan Rahil Ghaffar",
     "founder2Role": "Co-Founder, CTO & Board of Director",
     "founder2Tag": "TECHNICAL ARCHITECTURE & AI SYSTEMS",
-    "founder2Bio": "Aabaan is the technical backbone of Aureo — and one of the few developers his age who has actually built and deployed full AI systems in the real world. From AI platforms and voice agents to multi-agent automation systems, he architects everything from the ground up. If it's fast, smart, and built to last — that's Aabaan's work.",
+    "founder2Bio": "Aabaan is the technical backbone of Aureon — and one of the few developers his age who has actually built and deployed full AI systems in the real world. From AI platforms and voice agents to multi-agent automation systems, he architects everything from the ground up. If it's fast, smart, and built to last — that's Aabaan's work.",
     "founder3Name": "Abhay Shetty",
     "founder3Role": "Co-Founder, CSO & Board of Director",
     "founder3Tag": "CLIENT RELATIONS & OPS",
@@ -385,10 +385,10 @@
     "digitalMarketing": "Digital Marketing",
     "contactTitle": "Contact",
     "bookFreeCall": "Book a Free Call",
-    "copyright": "© 2026 Aureo. Crafted with precision."
+    "copyright": "© 2026 Aureon. Crafted with precision."
   },
   "chat": {
-    "greeting": "Hi! 👋 I'm the AI assistant for Aureo. Ask me anything about our services, pricing, process, or availability — I'm here to help!",
+    "greeting": "Hi! 👋 I'm the AI assistant for Aureon. Ask me anything about our services, pricing, process, or availability — I'm here to help!",
     "qr1": "What's your pricing?",
     "qr2": "How long does a website take?",
     "qr3": "What do you build?",
@@ -446,7 +446,7 @@
       "Make your existing tools 10x more powerful"
     ],
     "specialistTitle": "Meet Our AI Specialist.",
-    "specialistBody": "All AI and automation work at Aureo is led by Aabaan Rahil Ghaffar — Co-Founder & CTO. Aabaan has built full AI platforms, voice agents, multi-agent systems, and intelligent automation tools from the ground up. When you work with us on AI, you're working directly with someone who has actually built these systems — not someone who just read about them.",
+    "specialistBody": "All AI and automation work at Aureon is led by Aabaan Rahil Ghaffar — Co-Founder & CTO. Aabaan has built full AI platforms, voice agents, multi-agent systems, and intelligent automation tools from the ground up. When you work with us on AI, you're working directly with someone who has actually built these systems — not someone who just read about them.",
     "specialistCta": "Talk to Aabaan →"
   }
 }

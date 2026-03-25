@@ -10,7 +10,7 @@ app.use(express.json());
 
 const OPENAI_API_KEY = process.env.VITE_OPENAI_API_KEY;
 
-const SYSTEM_PROMPT = `You are the friendly, professional AI assistant for Aureo, a premium boutique digital agency based in Dubai, UAE. You speak on behalf of the agency and help potential clients get answers quickly.
+const SYSTEM_PROMPT = `You are the friendly, professional AI assistant for Aureon, a premium boutique digital agency based in Dubai, UAE. You speak on behalf of the agency and help potential clients get answers quickly.
 
 ABOUT THE AGENCY:
 - A 3-founder team: one lead developer, one UI/UX designer, and one marketing & sales expert
@@ -70,7 +70,7 @@ app.post('/api/chat', async (req, res) => {
       console.error('OpenAI API error:', errorData);
       return res.status(response.status).json({
         error: 'API request failed',
-        reply: "Sorry, I'm having a moment. Please try again or contact us directly at help@aureo-studio.com",
+        reply: "Sorry, I'm having a moment. Please try again or contact us directly at help@aureon-studio.com",
       });
     }
 
@@ -82,7 +82,7 @@ app.post('/api/chat', async (req, res) => {
     console.error('Server error:', error);
     res.status(500).json({
       error: 'Internal server error',
-      reply: "Sorry, I'm having a moment. Please try again or contact us directly at help@aureo-studio.com",
+      reply: "Sorry, I'm having a moment. Please try again or contact us directly at help@aureon-studio.com",
     });
   }
 });

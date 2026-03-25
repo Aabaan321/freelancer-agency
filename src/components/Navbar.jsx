@@ -66,7 +66,7 @@ export default function Navbar() {
       <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
         <div className="nav-inner">
           <Link to="/" className="logo">
-            <img src={aureoLogo} alt="Aureo" style={{ height: '72px', width: 'auto', objectFit: 'contain', borderRadius: '4px' }} />
+            <img src={aureoLogo} alt="Aureo" style={{ height: 'clamp(32px, 4vw, 44px)', width: 'auto', display: 'block', borderRadius: '4px' }} />
           </Link>
           <ul className="nav-links">
             {links.map(l => (

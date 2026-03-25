@@ -119,9 +119,20 @@ export default function Navbar() {
               </Link>
             </li>
           </ul>
-          <button className="hamburger" onClick={() => setMobileOpen(true)} aria-label="Open menu">
-            <span /><span /><span />
-          </button>
+
+          <div className="mobile-header-actions">
+            <div className="mobile-header-switchers">
+              <select value={i18n.language} onChange={(e) => changeLang(e.target.value)}>
+                {LANGUAGES.map(l => <option key={l.code} value={l.code}>{l.flag} {l.short}</option>)}
+              </select>
+              <select value={currency} onChange={(e) => changeCurr(e.target.value)}>
+                {CURRENCIES.map(c => <option key={c.code} value={c.code}>{c.code}</option>)}
+              </select>
+            </div>
+            <button className="hamburger" onClick={() => setMobileOpen(true)} aria-label="Open menu">
+              <span /><span /><span />
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -137,20 +148,6 @@ export default function Navbar() {
             <button onClick={() => setMobileOpen(false)} style={{ position: 'absolute', top: 24, right: 24, background: 'none', border: 'none', cursor: 'pointer', color: '#F5F5F5' }}>
               <X size={28} />
             </button>
-
-            {/* Mobile Language + Currency — top right */}
-            <div className="mobile-switchers">
-              <div className="mobile-switcher">
-                <select value={i18n.language} onChange={(e) => changeLang(e.target.value)}>
-                  {LANGUAGES.map(l => <option key={l.code} value={l.code}>{l.flag} {l.name}</option>)}
-                </select>
-              </div>
-              <div className="mobile-switcher">
-                <select value={currency} onChange={(e) => changeCurr(e.target.value)}>
-                  {CURRENCIES.map(c => <option key={c.code} value={c.code}>{c.flag} {c.name} ({c.code})</option>)}
-                </select>
-              </div>
-            </div>
 
             {links.map((l, i) => (
               <motion.div key={l.to} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>

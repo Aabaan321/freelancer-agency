@@ -273,9 +273,41 @@ h3 { font-size: clamp(22px, 2vw, 28px); font-weight: 600; }
 
 .mobile-nav a:hover { color: var(--gold); }
 
+.mobile-header-actions {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .navbar .nav-links { display: none; }
   .hamburger { display: flex; }
+  
+  .mobile-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .mobile-header-switchers {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .mobile-header-switchers select {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--surface-border);
+    border-radius: 6px;
+    color: var(--text-heading);
+    font-size: 13px;
+    padding: 6px 8px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+  }
+  
+  .mobile-header-switchers select:focus {
+    border-color: var(--gold);
+  }
 }
 
 /* ── Hero ── */
@@ -1684,48 +1716,6 @@ h3 { font-size: clamp(22px, 2vw, 28px); font-weight: 600; }
   font-size: 12px;
   color: var(--text-muted);
   font-family: var(--font-mono);
-}
-
-/* ── Mobile Switchers ── */
-.mobile-switchers {
-  position: absolute;
-  top: 22px;
-  right: 64px;
-  display: flex;
-  gap: 8px;
-  width: auto;
-  margin: 0;
-  z-index: 1010;
-}
-
-.mobile-switcher {
-  flex: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.mobile-switcher-label {
-  display: none;
-}
-
-.mobile-switcher select {
-  padding: 6px 12px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--surface-border);
-  border-radius: 6px;
-  color: var(--text-heading);
-  font-size: 13px;
-  font-family: var(--font-body);
-  appearance: none;
-  -webkit-appearance: none;
-  cursor: pointer;
-  width: auto;
-}
-
-.mobile-switcher select:focus {
-  outline: none;
-  border-color: var(--gold);
 }
 
 /* ── RTL Support (Arabic/Urdu) ── */

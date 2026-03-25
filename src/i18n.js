@@ -45,7 +45,7 @@ i18n
     interpolation: { escapeValue: false },
     detection: {
       order: ['localStorage', 'navigator'],
-      lookupLocalStorage: 'luxe_lang',
+      lookupLocalStorage: 'aureo_lang',
       caches: ['localStorage'],
     },
   });

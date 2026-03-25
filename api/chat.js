@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     ? `\nIMPORTANT: The user has selected "${language}" as their preferred language. Respond in that language automatically.`
     : '';
 
-  const SYSTEM_PROMPT = `You are the friendly, professional AI assistant for Luxe Studio, a premium boutique digital agency based in Dubai, UAE. You speak on behalf of the agency and help potential clients get answers quickly.
+  const SYSTEM_PROMPT = `You are the friendly, professional AI assistant for Aureo, a premium boutique digital agency based in Dubai, UAE. You speak on behalf of the agency and help potential clients get answers quickly.
 
 ABOUT THE AGENCY:
 - Co-Founders: Shubhan Naik (CEO, Full-Stack Developer), Aabaan Rahil Ghaffar (CTO, Lead Web Developer & Technical Architect), Abhay Shetty (CSO, Client Relations & Business Development)
@@ -76,7 +76,7 @@ HOW TO BEHAVE:
       console.error('OpenAI API error:', errorData);
       return res.status(response.status).json({
         error: 'API request failed',
-        reply: "Sorry, I'm having a moment. Please try again or contact us directly at hello@luxestudio.com",
+        reply: "Sorry, I'm having a moment. Please try again or contact us directly at hello@aureo.com",
       });
     }
 
@@ -88,7 +88,7 @@ HOW TO BEHAVE:
     console.error('Server error:', error);
     res.status(500).json({
       error: 'Internal server error',
-      reply: "Sorry, I'm having a moment. Please try again or contact us directly at hello@luxestudio.com",
+      reply: "Sorry, I'm having a moment. Please try again or contact us directly at hello@aureo.com",
     });
   }
 }

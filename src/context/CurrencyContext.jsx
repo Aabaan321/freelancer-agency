@@ -22,13 +22,13 @@ const CurrencyContext = createContext();
 
 export function CurrencyProvider({ children }) {
   const [currency, setCurrencyState] = useState(() => {
-    return localStorage.getItem('luxe_currency') || 'AED';
+    return localStorage.getItem('aureo_currency') || 'AED';
   });
   const [rates, setRates] = useState({ AED: 1 });
 
   useEffect(() => {
-    const cached = localStorage.getItem('luxe_rates');
-    const cachedTime = localStorage.getItem('luxe_rates_time');
+    const cached = localStorage.getItem('aureo_rates');
+    const cachedTime = localStorage.getItem('aureo_rates_time');
     const oneHour = 60 * 60 * 1000;
 
     if (cached && cachedTime && Date.now() - parseInt(cachedTime) < oneHour) {
@@ -41,8 +41,8 @@ export function CurrencyProvider({ children }) {
       .then(data => {
         if (data.rates) {
           setRates(data.rates);
-          localStorage.setItem('luxe_rates', JSON.stringify(data.rates));
-          localStorage.setItem('luxe_rates_time', Date.now().toString());
+          localStorage.setItem('aureo_rates', JSON.stringify(data.rates));
+          localStorage.setItem('aureo_rates_time', Date.now().toString());
         }
       })
       .catch(() => {
@@ -53,7 +53,7 @@ export function CurrencyProvider({ children }) {
 
   const setCurrency = useCallback((code) => {
     setCurrencyState(code);
-    localStorage.setItem('luxe_currency', code);
+    localStorage.setItem('aureo_currency', code);
   }, []);
 
   const convert = useCallback((aedAmount) => {

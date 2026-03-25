@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <div className="logo">Luxe Studio</div>
+            <div className="logo">Aureo</div>
             <p style={{ fontStyle: 'italic', color: '#E8D5A3', fontSize: '14px', marginBottom: '8px' }}>{t('footer.tagline')}</p>
             <p>{t('footer.desc')}</p>
             <div className="social-links" style={{ fontSize: '13px', fontWeight: 'bold' }}>
@@ -40,7 +40,7 @@ export default function Footer() {
           <div>
             <h4>{t('footer.contactTitle')}</h4>
             <ul className="footer-links">
-              <li>📧 hello@luxestudio.com</li>
+              <li>📧 hello@aureo.com</li>
               <li>📱 +971 XX XXX XXXX</li>
               <li>📍 Dubai, UAE</li>
             </ul>

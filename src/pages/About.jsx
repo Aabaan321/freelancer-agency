@@ -11,8 +11,8 @@ export default function About() {
 
   const founders = [
     { name: t('about.founder1Name'), role: t('about.founder1Role'), tag: t('about.founder1Tag'), bio: t('about.founder1Bio'), image: shubhanImg, skills: ['Full-Stack Developer', 'Frontend UI/UX', 'Business Strategy', 'Team Leadership'] },
-    { name: t('about.founder2Name'), role: t('about.founder2Role'), tag: t('about.founder2Tag'), bio: t('about.founder2Bio'), image: aabaanImg, skills: ['Full-Stack Developer', 'AI Systems', 'Voice Agents', 'System Architecture', 'API Development', 'Automation'], linkedin: 'https://www.linkedin.com/in/aabaan-rahil-ghaffar-055490359?utm_source=share_via&utm_content=profile&utm_medium=member_ios' },
-    { name: t('about.founder3Name'), role: t('about.founder3Role'), tag: t('about.founder3Tag'), bio: t('about.founder3Bio'), image: abhayImg, skills: ['Client Relations', 'Sales', 'Strategy', 'Operations'] },
+    { name: t('about.founder2Name'), role: t('about.founder2Role'), tag: t('about.founder2Tag'), bio: t('about.founder2Bio'), image: aabaanImg, skills: ['Full-Stack Developer', 'AI & Voice Agents', 'System Architecture', 'Business Strategy', 'Planning'], linkedin: 'https://www.linkedin.com/in/aabaan-rahil-ghaffar-055490359?utm_source=share_via&utm_content=profile&utm_medium=member_ios' },
+    { name: t('about.founder3Name'), role: t('about.founder3Role'), tag: t('about.founder3Tag'), bio: t('about.founder3Bio'), image: abhayImg, skills: ['Client Relations', 'Sales', 'Strategy', 'Operations', 'Finance'] },
   ];
 
   return (

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Code, Layers, TrendingUp, ChevronDown, ArrowRight, Star, CheckCircle } from 'lucide-react';
+import { Code, Layers, TrendingUp, ChevronDown, ArrowRight, Star, CheckCircle, Brain } from 'lucide-react';
 import { FadeIn, StaggerContainer, StaggerItem, CountUp } from '../components/ScrollAnimations';
 import { useTranslation } from 'react-i18next';
 import { useCurrency } from '../context/CurrencyContext';
@@ -73,6 +73,7 @@ export default function Home() {
               { icon: <Code size={32} />, title: t('home.svcWebDev'), desc: t('home.svcWebDevDesc'), tags: ['React', 'Tailwind', 'Next.js', 'Webflow'] },
               { icon: <Layers size={32} />, title: t('home.svcDesign'), desc: t('home.svcDesignDesc'), tags: ['Figma', 'Prototyping', 'Brand Identity'] },
               { icon: <TrendingUp size={32} />, title: t('home.svcMarketing'), desc: t('home.svcMarketingDesc'), tags: ['SEO', 'Social', 'Strategy', 'Outreach'] },
+              { icon: <Brain size={32} style={{ color: 'var(--gold)' }} />, title: t('home.svcAi'), desc: t('home.svcAiDesc'), tags: ['AI Chatbots', 'Voice Agents', 'Automation', 'API Integration'], link: '/services/ai' },
             ].map((svc, i) => (
               <StaggerItem key={i}>
                 <div className="glass-card service-card">
@@ -80,7 +81,9 @@ export default function Home() {
                   <h3>{svc.title}</h3>
                   <p>{svc.desc}</p>
                   <div className="tags">{svc.tags.map(tg => <span key={tg}>{tg}</span>)}</div>
-                  <Link to="/services" className="card-link">{t('home.exploreService')} <ArrowRight size={14} /></Link>
+                  <Link to={svc.link || "/services"} className="card-link" style={svc.link ? { color: 'var(--gold)' } : {}}>
+                    {svc.link ? t('services.exploreAi') : t('home.exploreService')} <ArrowRight size={14} />
+                  </Link>
                 </div>
               </StaggerItem>
             ))}

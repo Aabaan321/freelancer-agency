@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Code, Layers, TrendingUp, ArrowRight, Check } from 'lucide-react';
+import { Code, Layers, TrendingUp, ArrowRight, Check, Brain } from 'lucide-react';
 import { FadeIn, StaggerContainer, StaggerItem } from '../components/ScrollAnimations';
 import { useTranslation } from 'react-i18next';
 import { useCurrency } from '../context/CurrencyContext';
@@ -9,9 +9,10 @@ export default function Services() {
   const { convert } = useCurrency();
 
   const services = [
-    { tag: t('services.svc1Tag'), title: t('services.svc1Title'), body: t('services.svc1Body'), includes: t('services.svc1Includes', { returnObjects: true }), price: convert(1000), timeline: t('services.svc1Timeline'), tools: ['React', 'Next.js', 'Tailwind', 'Framer Motion', 'Vercel'], icon: <Code size={40} /> },
-    { tag: t('services.svc2Tag'), title: t('services.svc2Title'), body: t('services.svc2Body'), includes: t('services.svc2Includes', { returnObjects: true }), price: convert(800), timeline: t('services.svc2Timeline'), tools: ['Figma', 'Adobe Suite', 'Framer'], icon: <Layers size={40} /> },
-    { tag: t('services.svc3Tag'), title: t('services.svc3Title'), body: t('services.svc3Body'), includes: t('services.svc3Includes', { returnObjects: true }), price: convert(600), timeline: t('services.svc3Timeline'), tools: ['Google Analytics', 'SEMrush', 'Notion', 'Meta Ads'], icon: <TrendingUp size={40} /> },
+    { tag: t('services.svc1Tag'), title: t('services.svc1Title'), body: t('services.svc1Body'), includes: t('services.svc1Includes', { returnObjects: true }), price: convert(1000), timeline: t('services.svc1Timeline'), tools: ['React', 'Next.js', 'Tailwind', 'Framer Motion', 'Vercel'], icon: <Code size={40} />, ctaLink: '/contact' },
+    { tag: t('services.svc2Tag'), title: t('services.svc2Title'), body: t('services.svc2Body'), includes: t('services.svc2Includes', { returnObjects: true }), price: convert(800), timeline: t('services.svc2Timeline'), tools: ['Figma', 'Adobe Suite', 'Framer'], icon: <Layers size={40} />, ctaLink: '/contact' },
+    { tag: t('services.svc3Tag'), title: t('services.svc3Title'), body: t('services.svc3Body'), includes: t('services.svc3Includes', { returnObjects: true }), price: convert(600), timeline: t('services.svc3Timeline'), tools: ['Google Analytics', 'SEMrush', 'Notion', 'Meta Ads'], icon: <TrendingUp size={40} />, ctaLink: '/contact' },
+    { tag: t('services.svc4Tag'), title: t('services.svc4Title'), body: t('services.svc4Body'), includes: t('services.svc4Includes', { returnObjects: true }), customPrice: true, timeline: t('services.svc4Timeline'), tools: ['OpenAI', 'Python', 'Node.js', 'Vapi', 'LangChain'], icon: <Brain size={40} style={{ color: 'var(--gold)' }}/>, ctaLink: '/services/ai', ctaText: t('services.exploreAi') },
   ];
 
   const tiers = [
@@ -45,14 +46,14 @@ export default function Services() {
                       <li key={j}><span className="dot" />{item}</li>
                     ))}
                   </ul>
-                  <div className="pricing-card">
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                      <span style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('services.startingFrom')}</span>
-                      <span className="price">{svc.price}</span>
+                    <div className="pricing-card">
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+                        {!svc.customPrice && <span style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('services.startingFrom')}</span>}
+                        <span className="price">{svc.customPrice ? t('services.customQuote') : svc.price}</span>
+                      </div>
+                      <div className="timeline-info">{t('services.timeline')}: {svc.timeline}</div>
+                      <Link to={svc.ctaLink} className={svc.customPrice ? "btn btn-outline" : "btn btn-primary"} style={{ width: '100%', justifyContent: 'center' }}>{svc.ctaText || t('services.getCustomQuote')} <ArrowRight size={14} /></Link>
                     </div>
-                    <div className="timeline-info">{t('services.timeline')}: {svc.timeline}</div>
-                    <Link to="/contact" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>{t('services.getCustomQuote')} <ArrowRight size={14} /></Link>
-                  </div>
                   <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '20px' }}>
                     {svc.tools.map(tl => <span key={tl} style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', padding: '4px 10px', borderRadius: '4px', background: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)' }}>{tl}</span>)}
                   </div>

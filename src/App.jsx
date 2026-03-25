@@ -15,6 +15,7 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
+import AiService from './pages/AiService';
 import './i18n';
 import './index.css';
 
@@ -44,6 +45,7 @@ function AnimatedRoutes() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
         <Route path="/services" element={<PageWrapper><Services /></PageWrapper>} />
+        <Route path="/services/ai" element={<PageWrapper><AiService /></PageWrapper>} />
         <Route path="/how-we-work" element={<PageWrapper><HowWeWork /></PageWrapper>} />
         <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
         <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />

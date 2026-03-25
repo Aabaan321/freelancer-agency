@@ -11,16 +11,14 @@ export default function Projects() {
   const [selected, setSelected] = useState(null);
 
   const projects = [
-    { id: 1, title: t('projects.proj1Title'), category: 'Websites', desc: t('projects.proj1Desc'), challenge: t('projects.proj1Challenge'), solution: t('projects.proj1Solution'), results: t('projects.proj1Results'), tech: ['React', 'Framer Motion', 'Vercel'] },
-    { id: 2, title: t('projects.proj2Title'), category: 'Websites', desc: t('projects.proj2Desc'), challenge: t('projects.proj2Challenge'), solution: t('projects.proj2Solution'), results: t('projects.proj2Results'), tech: ['Next.js', 'Tailwind', 'Calendly'] },
-    { id: 3, title: t('projects.proj3Title'), category: 'Branding', desc: t('projects.proj3Desc'), challenge: t('projects.proj3Challenge'), solution: t('projects.proj3Solution'), results: t('projects.proj3Results'), tech: ['Figma', 'Shopify', 'Instagram'] },
-    { id: 4, title: t('projects.proj4Title'), category: 'Websites', desc: t('projects.proj4Desc'), challenge: t('projects.proj4Challenge'), solution: t('projects.proj4Solution'), results: t('projects.proj4Results'), tech: ['React', 'Three.js', 'Vercel'] },
-    { id: 5, title: t('projects.proj5Title'), category: 'Websites', desc: t('projects.proj5Desc'), challenge: t('projects.proj5Challenge'), solution: t('projects.proj5Solution'), results: t('projects.proj5Results'), tech: ['Next.js', 'Tailwind', 'Cal.com'] },
-    { id: 6, title: t('projects.proj6Title'), category: 'Marketing', desc: t('projects.proj6Desc'), challenge: t('projects.proj6Challenge'), solution: t('projects.proj6Solution'), results: t('projects.proj6Results'), tech: ['React', 'Google Ads', 'SEO'] },
+    { id: 1, title: t('projects.proj1Title'), category: 'AI & Automation', desc: t('projects.proj1Desc'), challenge: t('projects.proj1Challenge'), solution: t('projects.proj1Solution'), results: t('projects.proj1Results'), link: t('projects.proj1Link'), tech: ['React', 'Node.js', 'OpenAI API', 'Voice AI', 'REST API', 'Vercel'] },
+    { id: 2, title: t('projects.proj2Title'), category: 'AI & Automation', desc: t('projects.proj2Desc'), challenge: t('projects.proj2Challenge'), solution: t('projects.proj2Solution'), results: t('projects.proj2Results'), link: t('projects.proj2Link'), tech: ['JavaScript', 'Multi-Agent AI', 'OpenAI API', 'Voice AI', 'Firebase', 'Google Auth', 'Vercel'] },
+    { id: 3, title: t('projects.proj3Title'), category: 'Websites', desc: t('projects.proj3Desc'), challenge: t('projects.proj3Challenge'), solution: t('projects.proj3Solution'), results: t('projects.proj3Results'), link: t('projects.proj3Link'), tech: ['JavaScript', 'WebGL', 'TensorFlow.js', 'Hand Tracking API', 'Face Mesh', 'Canvas API', 'GitHub Pages'] },
+    { id: 4, title: t('projects.proj4Title'), category: 'Websites', desc: t('projects.proj4Desc'), challenge: t('projects.proj4Challenge'), solution: t('projects.proj4Solution'), results: t('projects.proj4Results'), link: t('projects.proj4Link'), tech: ['HTML', 'CSS', 'JavaScript', 'AI Assistant', 'Vercel'] },
   ];
 
-  const filters = [t('projects.all'), t('projects.websites'), t('projects.branding'), t('projects.marketing')];
-  const filterMap = { [t('projects.all')]: 'All', [t('projects.websites')]: 'Websites', [t('projects.branding')]: 'Branding', [t('projects.marketing')]: 'Marketing' };
+  const filters = [t('projects.all'), t('projects.ai_automation'), t('projects.websites'), t('projects.branding'), t('projects.marketing')];
+  const filterMap = { [t('projects.all')]: 'All', [t('projects.ai_automation')]: 'AI & Automation', [t('projects.websites')]: 'Websites', [t('projects.branding')]: 'Branding', [t('projects.marketing')]: 'Marketing' };
   const filtered = filter === 'All' ? projects : projects.filter(p => p.category === filter);
 
   return (
@@ -82,7 +80,14 @@ export default function Projects() {
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', margin: '24px 0' }}>
                 {selected.tech.map(tg => <span key={tg} style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', padding: '4px 10px', borderRadius: '4px', background: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)' }}>{tg}</span>)}
               </div>
-              <Link to="/contact" className="btn btn-primary" onClick={() => setSelected(null)}>{t('projects.bookSimilar')} <ArrowRight size={14} /></Link>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                {selected.link && (
+                  <a href={selected.link} target="_blank" rel="noopener noreferrer" className="btn btn-primary" onClick={(e) => e.stopPropagation()}>
+                    Visit Live Project <ArrowRight size={14} />
+                  </a>
+                )}
+                <Link to="/contact" className="btn btn-outline" onClick={() => setSelected(null)}>{t('projects.bookSimilar')} <ArrowRight size={14} /></Link>
+              </div>
             </motion.div>
           </motion.div>
         )}

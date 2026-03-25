@@ -135,16 +135,14 @@ export default function Navbar() {
               <X size={28} />
             </button>
 
-            {/* Mobile Language + Currency */}
+            {/* Mobile Language + Currency — top right */}
             <div className="mobile-switchers">
               <div className="mobile-switcher">
-                <span className="mobile-switcher-label">🌍 Language</span>
                 <select value={i18n.language} onChange={(e) => changeLang(e.target.value)}>
                   {LANGUAGES.map(l => <option key={l.code} value={l.code}>{l.flag} {l.name}</option>)}
                 </select>
               </div>
               <div className="mobile-switcher">
-                <span className="mobile-switcher-label">💱 Currency</span>
                 <select value={currency} onChange={(e) => changeCurr(e.target.value)}>
                   {CURRENCIES.map(c => <option key={c.code} value={c.code}>{c.flag} {c.name} ({c.code})</option>)}
                 </select>

@@ -6,15 +6,15 @@ import aabaanImg from '../assets/aabaan.jpeg';
 import shubhanImg from '../assets/shubhan.jpeg';
 
 const founders = [
-  { name: 'Shubhan Naik', role: 'CEO & Board of Director', tag: 'LEADERSHIP & STRATEGY', initials: 'SN', image: shubhanImg,
-    bio: "Leads the overall vision and strategy for Luxe Studio. Ensures every project aligns with the highest standards of quality and client satisfaction.",
-    skills: ['Leadership', 'Strategy', 'Client Relations', 'Vision'] },
-  { name: 'Aabaan Rahil Ghaffar', role: 'CTO & Board of Director', tag: 'CODE & ARCHITECTURE', initials: 'AG', image: aabaanImg,
-    bio: "Responsible for all front-end and back-end development. Turns designs into fast, clean, production-grade websites. Obsessed with performance and code quality.",
-    skills: ['React', 'Next.js', 'Node.js', 'UI Dev'] },
-  { name: 'Abhay Shetty', role: 'CSO & Board of Director', tag: 'SALES & OPERATIONS', initials: 'AS', image: null,
-    bio: "Handles all client outreach, marketing strategy, and business development. The reason you found us — and the person who will make sure you're found too.",
-    skills: ['Operations', 'Sales', 'Strategy', 'Process'] },
+  { name: 'Shubhan Naik', role: 'CEO & Board of Director', tag: 'DEVELOPMENT & LEADERSHIP', initials: 'SN', image: shubhanImg,
+    bio: "A full-stack web developer and the acting CEO. Shubhan drives the overall vision while also writing clean, production-ready code alongside the technical team.",
+    skills: ['Web Development', 'React', 'Leadership', 'Strategy'] },
+  { name: 'Aabaan Rahil Ghaffar', role: 'CTO & Board of Director', tag: 'TECHNICAL ARCHITECTURE', initials: 'AG', image: aabaanImg,
+    bio: "Head of the technical team and lead web developer. Aabaan heads the planning strategy, technical architecture, and leadership of all development projects from end to end.",
+    skills: ['React', 'Planning Strategy', 'Leadership', 'Full-Stack'] },
+  { name: 'Abhay Shetty', role: 'CSO & Board of Director', tag: 'CLIENT RELATIONS & OPS', initials: 'AS', image: null,
+    bio: "Handles all client relations, communication, and business development. Abhay ensures every client receives a premium, transparent, and seamless experience.",
+    skills: ['Client Relations', 'Sales', 'Strategy', 'Operations'] },
 ];
 
 export default function About() {

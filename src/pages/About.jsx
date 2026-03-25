@@ -8,10 +8,10 @@ import shubhanImg from '../assets/shubhan.jpeg';
 const founders = [
   { name: 'Shubhan Naik', role: 'CEO & Board of Director', tag: 'DEVELOPMENT & LEADERSHIP', initials: 'SN', image: shubhanImg,
     bio: "A full-stack web developer and the acting CEO. Shubhan drives the overall vision while also writing clean, production-ready code alongside the technical team.",
-    skills: ['Web Development', 'React', 'Leadership', 'Strategy'] },
+    skills: ['Full-Stack Developer', 'Frontend UI/UX', 'Business Strategy', 'Team Leadership'] },
   { name: 'Aabaan Rahil Ghaffar', role: 'CTO & Board of Director', tag: 'TECHNICAL ARCHITECTURE', initials: 'AG', image: aabaanImg,
     bio: "Head of the technical team and lead web developer. Aabaan heads the planning strategy, technical architecture, and leadership of all development projects from end to end.",
-    skills: ['React', 'Planning Strategy', 'Leadership', 'Full-Stack'] },
+    skills: ['Full-Stack Developer', 'System Architecture', 'Technical Strategy', 'Project Planning'] },
   { name: 'Abhay Shetty', role: 'CSO & Board of Director', tag: 'CLIENT RELATIONS & OPS', initials: 'AS', image: null,
     bio: "Handles all client relations, communication, and business development. Abhay ensures every client receives a premium, transparent, and seamless experience.",
     skills: ['Client Relations', 'Sales', 'Strategy', 'Operations'] },

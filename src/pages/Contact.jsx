@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Clock, ArrowRight, Check, X } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, ArrowRight, Check, X, MessageCircle } from 'lucide-react';
 import { FadeIn } from '../components/ScrollAnimations';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
@@ -168,7 +168,7 @@ export default function Contact() {
                       {errors.message && <span className="error-msg">{errors.message.message}</span>}
                     </div>
                     <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', marginTop: '16px' }}>
-                      {t('contact.sendMessage')} <ArrowRight size={16} />
+                      <MessageCircle size={16} /> {t('contact.sendMessage')} via WhatsApp <ArrowRight size={16} />
                     </button>
                     <p style={{ textAlign: 'center', fontSize: '12px', color: 'var(--text-muted)', marginTop: '16px' }}>💬 Opens WhatsApp directly — no bots, no delays.</p>
                   </form>

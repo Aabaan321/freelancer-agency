@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LANGUAGES } from './i18n';
@@ -26,11 +26,12 @@ function ScrollToTop() {
 }
 
 function PageWrapper({ children }) {
+  const { pathname } = useLocation();
   return (
     <motion.div
+      key={pathname}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -16 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
     >
       {children}
@@ -38,21 +39,18 @@ function PageWrapper({ children }) {
   );
 }
 
-function AnimatedRoutes() {
-  const location = useLocation();
+function AppRoutes() {
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
-        <Route path="/services" element={<PageWrapper><Services /></PageWrapper>} />
-        <Route path="/services/ai" element={<PageWrapper><AiService /></PageWrapper>} />
-        <Route path="/how-we-work" element={<PageWrapper><HowWeWork /></PageWrapper>} />
-        <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
-        <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
-        <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
-        <Route path="/faq" element={<PageWrapper><FAQ /></PageWrapper>} />
-      </Routes>
-    </AnimatePresence>
+    <Routes>
+      <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
+      <Route path="/services" element={<PageWrapper><Services /></PageWrapper>} />
+      <Route path="/services/ai" element={<PageWrapper><AiService /></PageWrapper>} />
+      <Route path="/how-we-work" element={<PageWrapper><HowWeWork /></PageWrapper>} />
+      <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
+      <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
+      <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+      <Route path="/faq" element={<PageWrapper><FAQ /></PageWrapper>} />
+    </Routes>
   );
 }
 
@@ -81,7 +79,7 @@ export default function App() {
         <AnnouncementBar />
         <Navbar />
         <main>
-          <AnimatedRoutes />
+          <AppRoutes />
         </main>
         <Footer />
         <ChatWidget />

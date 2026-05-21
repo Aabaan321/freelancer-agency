@@ -14,8 +14,8 @@ Built with Next.js 15 (App Router), Supabase (Auth + Postgres + Realtime + RLS),
 - Lenis smooth scroll, magnetic CTAs, scroll-progress bar, custom cursor
 - Services, AI Studio, Process, About, Work (with per-case-study deep-dive pages), Pricing, Contact, FAQ
 - Multi-currency-aware AI chat widget (rate-limited, OpenAI-powered)
-- 15-language locale infrastructure (English populated; others scaffolded)
 - Dark theme with gold accent palette
+- i18n: ready for a Next 16-compatible library (next-intl v4 / Lingui) — not wired in yet
 
 **Admin portal** at `/admin`
 
@@ -112,6 +112,6 @@ Realtime is enabled on `tasks`, `milestones`, `messages`, `change_requests`, `no
 
 - Live Stripe processing (UI + intent stub in place, no live keys)
 - Resend email sending (UI in place, transport not wired)
-- Locale-prefixed routing (all 15 locale files scaffolded — wire next-intl plugin to enable)
+- Locale-prefixed routing (needs next-intl v4 to support Next 16, then re-add `i18n/` + `messages/`)
 - File upload UI on admin side (storage bucket + policies in place)
 - White-label per-client theming (settings page in place)

@@ -1,0 +1,54 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "ai": "AI Studio",
+    "process": "Process",
+    "work": "Work",
+    "pricing": "Pricing",
+    "about": "About",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "login": "Client Login",
+    "startProject": "Start a project"
+  },
+  "home": {
+    "announcement": "{remaining} spots open for this quarter",
+    "heroEyebrow": "Boutique digital studio · Est. 2024",
+    "heroTitle": "Design with intent.\nBuild with care.\nShip without compromise.",
+    "heroSub": "We partner with a handful of ambitious brands each quarter to design, build, and grow premium digital products.",
+    "heroCta": "Start a project",
+    "heroSecondary": "See our work",
+    "stat1": "Active clients",
+    "stat2": "Average launch",
+    "stat3": "Client retention",
+    "trustedBy": "Trusted by founders who don't settle",
+    "servicesEyebrow": "What we do",
+    "servicesTitle": "Four disciplines. One studio.",
+    "servicesSub": "Every engagement is shaped around what you actually need — never padded with line items.",
+    "processEyebrow": "How we work",
+    "processTitle": "21 days. Six checkpoints. One thing finished beautifully.",
+    "processSub": "A repeatable process that respects your time and ends with something you're proud to show off.",
+    "founderEyebrow": "The studio",
+    "founderTitle": "Three founders. Every project.",
+    "founderSub": "You'll never work with a junior account manager. You work directly with the people building it.",
+    "ctaTitle": "We work with five brands at a time.",
+    "ctaSub": "It's not a marketing line — it's how we deliver work we're proud of. Talk to us before the next quarter fills up.",
+    "ctaButton": "Book a discovery call"
+  },
+  "footer": {
+    "tagline": "A boutique digital studio building premium websites, AI products, and brand systems.",
+    "explore": "Explore",
+    "studio": "Studio",
+    "legal": "Legal",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "rights": "All rights reserved."
+  },
+  "chat": {
+    "title": "Aureon Concierge",
+    "subtitle": "AI assistant · usually replies instantly",
+    "placeholder": "Ask anything about pricing, process, or our work…",
+    "greeting": "Hi — I'm Aureon's AI concierge. Tell me about your project, or ask anything you'd like to know about working with us."
+  }
+}

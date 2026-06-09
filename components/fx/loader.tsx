@@ -64,9 +64,8 @@ export function Loader() {
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
               className="relative h-28 w-28"
             >
-              <div className="absolute inset-0 animate-blob bg-iridescent opacity-90 blur-[2px]" />
-              <div className="absolute inset-2 animate-blob chrome [animation-delay:-3s] mix-blend-screen opacity-70" />
-              <div className="absolute inset-0 animate-spin-slow rounded-full border border-white/20" />
+              <div className="absolute inset-0 animate-blob bg-iridescent opacity-90 blur-[1px]" />
+              <div className="absolute inset-0 animate-spin-slow rounded-full border border-gold/30" />
             </motion.div>
 
             {/* wordmark */}

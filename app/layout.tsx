@@ -4,7 +4,6 @@ import { Toaster } from "@/components/ui/sonner";
 import { SITE } from "@/lib/config";
 import { AuroraBackground } from "@/components/fx/aurora-background";
 import { Loader } from "@/components/fx/loader";
-import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
 import "./globals.css";
 
@@ -53,7 +52,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="grain min-h-screen">
         <AuroraBackground />
         <Loader />
-        <SmoothScroll />
         <ScrollProgress />
         {children}
         <Toaster richColors position="top-center" />

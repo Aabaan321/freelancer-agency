@@ -25,7 +25,7 @@ export function Hero() {
         className="absolute inset-0 -z-10 opacity-80"
         aria-hidden
       >
-        <div className="absolute inset-0 bg-mesh-gold animate-gradient-x" />
+        <div className="absolute inset-0 bg-mesh-gold" />
         <div className="absolute -top-1/4 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] rounded-full"
              style={{
                background:
@@ -47,9 +47,9 @@ export function Hero() {
 
       {/* Floating particles */}
       <div className="absolute inset-0 -z-10" aria-hidden>
-        {[...Array(40)].map((_, i) => {
+        {[...Array(12)].map((_, i) => {
           const delay = (i * 0.31) % 4;
-          const dur = 4 + (i % 5);
+          const dur = 5 + (i % 5);
           const left = (i * 53) % 100;
           const top = (i * 37) % 100;
           return (

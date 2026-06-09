@@ -70,7 +70,7 @@ const config: Config = {
       },
       backgroundImage: {
         "gold-gradient": "linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(45 70% 70%) 50%, hsl(var(--gold)) 100%)",
-        "iridescent": "linear-gradient(115deg, hsl(var(--neon-violet)) 0%, hsl(var(--neon-cyan)) 30%, hsl(var(--gold)) 55%, hsl(var(--neon-magenta)) 80%, hsl(var(--neon-violet)) 100%)",
+        "iridescent": "linear-gradient(135deg, hsl(43 72% 68%) 0%, hsl(43 60% 52%) 50%, hsl(43 78% 72%) 100%)",
         "chrome": "linear-gradient(180deg, hsla(0,0%,100%,0.9) 0%, hsla(220,15%,70%,0.55) 18%, hsla(220,20%,30%,0.35) 50%, hsla(220,15%,75%,0.5) 82%, hsla(0,0%,100%,0.85) 100%)",
         "aurora": "radial-gradient(40% 60% at 20% 20%, hsla(var(--neon-violet),0.35), transparent 60%), radial-gradient(40% 50% at 80% 10%, hsla(var(--neon-cyan),0.28), transparent 60%), radial-gradient(50% 60% at 60% 90%, hsla(var(--gold),0.25), transparent 60%), radial-gradient(40% 40% at 10% 80%, hsla(var(--neon-magenta),0.22), transparent 60%)",
         "mesh-gold": "radial-gradient(ellipse 80% 50% at 50% -20%, hsla(43,55%,54%,0.3), transparent), radial-gradient(ellipse 60% 50% at 80% 50%, hsla(43,55%,54%,0.15), transparent)",

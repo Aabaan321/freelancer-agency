@@ -4,28 +4,29 @@
 
 @layer base {
   :root {
-    /* ---- Aureon "mix of all" palette ---- */
-    --bg: 245 30% 4%;
-    --bg-subtle: 244 24% 7%;
-    --bg-elevated: 243 22% 10%;
-    --ink: 250 30% 97%;
-    --ink-muted: 245 14% 74%;
-    --ink-subtle: 245 10% 52%;
+    /* ---- Aureon — deep dark + gold ---- */
+    --bg: 240 20% 4%;
+    --bg-subtle: 240 16% 7%;
+    --bg-elevated: 240 13% 10%;
+    --ink: 40 25% 96%;
+    --ink-muted: 40 12% 74%;
+    --ink-subtle: 40 8% 53%;
 
-    --gold: 43 80% 60%;
-    --gold-muted: 43 55% 68%;
-    --gold-dim: 43 30% 24%;
+    --gold: 43 62% 56%;
+    --gold-muted: 43 46% 66%;
+    --gold-dim: 43 26% 24%;
 
-    --neon-cyan: 186 100% 60%;
-    --neon-violet: 264 90% 68%;
-    --neon-magenta: 320 95% 64%;
-    --neon-lime: 96 90% 60%;
+    /* legacy "neon" accent tokens remapped to gold so every accent stays on-theme */
+    --neon-cyan: 43 62% 56%;
+    --neon-violet: 43 55% 62%;
+    --neon-magenta: 40 50% 52%;
+    --neon-lime: 43 62% 56%;
 
-    --line: 250 20% 18%;
-    --success: 152 65% 50%;
-    --warning: 38 95% 58%;
-    --danger: 354 80% 60%;
-    --info: 210 90% 62%;
+    --line: 240 9% 17%;
+    --success: 145 52% 48%;
+    --warning: 38 90% 55%;
+    --danger: 0 65% 56%;
+    --info: 210 80% 60%;
     --radius: 14px;
 
     --font-serif: ui-serif, Georgia, serif;
@@ -34,16 +35,16 @@
   }
 
   .light {
-    --bg: 250 40% 97%;
-    --bg-subtle: 250 30% 93%;
+    --bg: 40 30% 98%;
+    --bg-subtle: 40 25% 95%;
     --bg-elevated: 0 0% 100%;
-    --ink: 245 30% 10%;
-    --ink-muted: 245 12% 32%;
-    --ink-subtle: 245 8% 46%;
-    --gold: 40 70% 44%;
-    --gold-muted: 40 50% 50%;
-    --gold-dim: 40 40% 82%;
-    --line: 245 16% 86%;
+    --ink: 240 18% 8%;
+    --ink-muted: 240 8% 30%;
+    --ink-subtle: 240 5% 45%;
+    --gold: 43 60% 44%;
+    --gold-muted: 43 45% 52%;
+    --gold-dim: 43 30% 84%;
+    --line: 40 10% 87%;
   }
 
   * { @apply border-line; }
@@ -58,54 +59,49 @@
 
   body {
     @apply bg-bg text-ink font-sans antialiased;
-    position: relative;
-    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, hsl(43 62% 56% / 0.08), transparent 60%),
+      radial-gradient(ellipse 50% 50% at 90% 95%, hsl(43 62% 56% / 0.04), transparent 60%);
+    background-attachment: fixed;
   }
 
-  ::selection { @apply bg-neon-violet/30 text-ink; }
+  ::selection { @apply bg-gold/30 text-ink; }
   [dir="rtl"] { font-family: var(--font-sans); }
 
   h1, h2, h3, h4 { @apply font-serif tracking-tight; }
 }
 
 @layer components {
-  /* ====================================================================
-     GLASS SURFACES — the core aesthetic. Layered, blurred, hairline-lit.
-     ==================================================================== */
+  /* Glass surfaces — kept subtle and cheaper (lighter blur) */
   .glass {
-    background: linear-gradient(135deg, hsla(0,0%,100%,0.06), hsla(0,0%,100%,0.02));
-    @apply backdrop-blur-xl border border-white/10;
-    box-shadow: 0 8px 32px -8px rgba(0,0,0,0.55), inset 0 1px 0 0 hsla(0,0%,100%,0.08);
+    background: linear-gradient(135deg, hsla(0,0%,100%,0.05), hsla(0,0%,100%,0.02));
+    @apply backdrop-blur-md border border-white/10;
+    box-shadow: 0 8px 30px -14px rgba(0,0,0,0.6);
   }
   .glass-strong {
-    background: linear-gradient(135deg, hsla(0,0%,100%,0.10), hsla(0,0%,100%,0.03));
-    @apply backdrop-blur-2xl border border-white/10;
-    box-shadow: 0 16px 50px -10px rgba(0,0,0,0.65), inset 0 1px 0 0 hsla(0,0%,100%,0.12);
+    background: linear-gradient(135deg, hsla(0,0%,100%,0.07), hsla(0,0%,100%,0.02));
+    @apply backdrop-blur-lg border border-white/10;
+    box-shadow: 0 16px 50px -18px rgba(0,0,0,0.7);
   }
   .glass-frost {
-    background: hsla(245,30%,12%,0.45);
-    @apply backdrop-blur-2xl border border-white/10;
+    background: hsla(240,16%,8%,0.7);
+    @apply backdrop-blur-lg border border-white/10;
   }
-  /* Liquid chrome / mercury surface */
   .chrome {
-    background: linear-gradient(180deg, hsla(0,0%,100%,0.85) 0%, hsla(220,15%,72%,0.5) 20%, hsla(220,22%,28%,0.4) 52%, hsla(220,15%,78%,0.5) 82%, hsla(0,0%,100%,0.8) 100%);
+    background: linear-gradient(180deg, hsl(43 75% 74%), hsl(43 55% 46%) 52%, hsl(43 72% 70%));
     @apply text-bg;
   }
-  /* Neon glass — for accent cards */
   .glass-neon {
-    background: linear-gradient(135deg, hsla(264,90%,68%,0.10), hsla(186,100%,60%,0.06));
-    @apply backdrop-blur-xl border border-white/10;
-    box-shadow: 0 0 40px -10px hsl(var(--neon-violet)/0.4), inset 0 1px 0 0 hsla(0,0%,100%,0.08);
+    background: linear-gradient(135deg, hsla(43,62%,56%,0.10), hsla(43,40%,40%,0.04));
+    @apply backdrop-blur-md border border-gold/20;
+    box-shadow: 0 0 40px -14px hsl(var(--gold)/0.3);
   }
 
-  /* Iridescent gradient border (animated) */
   .border-iridescent {
     border: 1px solid transparent;
     background:
       linear-gradient(hsl(var(--bg-elevated)), hsl(var(--bg-elevated))) padding-box,
-      linear-gradient(115deg, hsl(var(--neon-violet)), hsl(var(--neon-cyan)), hsl(var(--gold)), hsl(var(--neon-magenta))) border-box;
-    background-size: 100% 100%, 300% 300%;
-    animation: text-shimmer 6s linear infinite;
+      linear-gradient(135deg, hsl(var(--gold)/0.6), hsl(var(--gold)/0.12)) border-box;
   }
   .border-gradient {
     border: 1px solid transparent;
@@ -121,51 +117,37 @@
   .text-balance { text-wrap: balance; }
   .text-pretty { text-wrap: pretty; }
 
-  /* ---- Text treatments ---- */
   .gradient-text { @apply bg-clip-text text-transparent bg-gradient-to-br from-ink via-ink to-gold-muted; }
-  .gold-text {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(43 80% 70%), hsl(43 80% 56%) 50%, hsl(43 90% 78%));
-  }
+  .gold-text,
   .iridescent-text {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(115deg, hsl(var(--neon-violet)), hsl(var(--neon-cyan)), hsl(var(--gold)), hsl(var(--neon-magenta)), hsl(var(--neon-violet)));
-    background-size: 200% auto;
-    animation: text-shimmer 5s linear infinite;
+    background-image: linear-gradient(135deg, hsl(43 72% 70%), hsl(43 60% 54%) 50%, hsl(43 78% 74%));
   }
   .chrome-text {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(180deg, #fff 10%, #b8c0d0 40%, #5a6478 55%, #cfd6e4 75%, #fff 100%);
+    background-image: linear-gradient(180deg, hsl(43 78% 78%), hsl(43 50% 48%) 55%, hsl(43 78% 74%));
   }
 
-  /* ---- Glow ---- */
-  .glow-gold { box-shadow: 0 0 0 1px hsl(var(--gold)/0.18), 0 8px 50px -8px hsl(var(--gold)/0.35); }
-  .glow-cyan { box-shadow: 0 0 50px -8px hsl(var(--neon-cyan)/0.45); }
-  .glow-violet { box-shadow: 0 0 50px -8px hsl(var(--neon-violet)/0.45); }
-  .glow-soft { box-shadow: 0 30px 90px -24px hsl(var(--neon-violet)/0.25); }
-  .text-glow { text-shadow: 0 0 24px hsl(var(--gold)/0.5); }
+  .glow-gold { box-shadow: 0 0 0 1px hsl(var(--gold)/0.18), 0 8px 50px -10px hsl(var(--gold)/0.32); }
+  .glow-cyan { box-shadow: 0 0 50px -12px hsl(var(--gold)/0.32); }
+  .glow-violet { box-shadow: 0 0 50px -12px hsl(var(--gold)/0.32); }
+  .glow-soft { box-shadow: 0 30px 90px -28px hsl(var(--gold)/0.22); }
+  .text-glow { text-shadow: 0 0 24px hsl(var(--gold)/0.45); }
 
-  /* ---- Aurora field (drop behind sections) ---- */
+  /* aurora-field kept as a cheap, static gold wash (no animation) */
   .aurora-field { position: relative; isolation: isolate; }
   .aurora-field::before {
-    content: ""; position: absolute; inset: -20%; z-index: -1;
-    background-image:
-      radial-gradient(40% 55% at 18% 22%, hsla(264,90%,68%,0.30), transparent 60%),
-      radial-gradient(38% 48% at 82% 12%, hsla(186,100%,60%,0.22), transparent 60%),
-      radial-gradient(50% 60% at 62% 88%, hsla(43,80%,60%,0.22), transparent 60%),
-      radial-gradient(40% 42% at 8% 82%, hsla(320,95%,64%,0.18), transparent 60%);
-    filter: blur(40px);
-    animation: aurora-drift 22s ease-in-out infinite;
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background-image: radial-gradient(50% 50% at 50% 0%, hsl(43 62% 56% / 0.12), transparent 65%);
   }
 
   .hairline { @apply border-white/10; }
   .ring-gold { @apply ring-1 ring-gold/30; }
 
-  /* ---- Grain overlay (apply to <body>) ---- */
   .grain::after {
     content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 2;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
-    opacity: 0.05; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E");
+    opacity: 0.04; mix-blend-mode: overlay;
   }
 
   .scroll-bar-hidden { scrollbar-width: none; }
@@ -181,8 +163,7 @@
   }
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: hsl(var(--bg)); }
 ::-webkit-scrollbar-thumb { background: hsl(var(--line)); border-radius: 8px; border: 2px solid hsl(var(--bg)); }
-::-webkit-scrollbar-thumb:hover { background: hsl(var(--neon-violet)/0.5); }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--gold) / 0.5); }

@@ -50,14 +50,14 @@ export function Navbar() {
           className={cn(
             "container-wide flex items-center justify-between rounded-full transition-all duration-500",
             scrolled
-              ? "bg-bg-elevated/80 backdrop-blur-2xl border border-line/60 px-4 py-2 shadow-[0_8px_40px_-20px_rgba(0,0,0,0.6)]"
+              ? "glass-strong px-4 py-2"
               : "px-4 py-1",
           )}
         >
           <Link href="/" className="flex items-center gap-2 group" aria-label={SITE.name}>
-            <div className="relative h-8 w-8 rounded-full bg-gradient-to-br from-gold via-gold-muted to-gold/60 grid place-items-center">
+            <div className="relative h-8 w-8 rounded-full bg-iridescent grid place-items-center">
               <span className="font-serif text-bg text-base font-bold">A</span>
-              <span className="absolute inset-0 rounded-full ring-1 ring-gold/40 group-hover:scale-110 transition-transform" />
+              <span className="absolute inset-0 rounded-full ring-1 ring-white/30 group-hover:scale-110 transition-transform" />
             </div>
             <span className="font-serif text-lg tracking-tight">{SITE.name.split(" ")[0]}</span>
           </Link>
@@ -71,14 +71,14 @@ export function Navbar() {
                   href={item.href}
                   className={cn(
                     "relative px-3 py-2 text-sm transition-colors",
-                    active ? "text-gold" : "text-ink-muted hover:text-ink",
+                    active ? "text-ink" : "text-ink-muted hover:text-ink",
                   )}
                 >
                   {item.label}
                   {active && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 -z-10 rounded-full bg-gold/10 border border-gold/20"
+                      className="absolute inset-0 -z-10 rounded-full border border-white/15 bg-white/5"
                       transition={{ type: "spring", stiffness: 300, damping: 28 }}
                     />
                   )}

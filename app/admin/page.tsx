@@ -1,129 +1,87 @@
 import Link from "next/link";
-import { Users, FolderKanban, Inbox, CheckCircle2, ArrowUpRight, Activity } from "lucide-react";
+import { Users, FolderKanban, Inbox, Receipt, ArrowUpRight, Activity } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { PageHeader } from "@/components/portal/page-header";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { formatRelativeTime } from "@/lib/utils";
+import { formatCurrency } from "@/lib/currency";
 
 export const metadata = { title: "Dashboard · Admin" };
 
 export default async function AdminDashboard() {
   const supabase = await createClient();
 
-  const [
-    { count: clientCount },
-    { count: projectCount },
-    { count: openChangeRequests },
-    { count: completedTasks },
-    { data: recentActivity },
-    { data: upcomingMilestones },
-  ] = await Promise.all([
-    supabase.from("clients").select("*", { count: "exact", head: true }),
-    supabase.from("projects").select("*", { count: "exact", head: true }).neq("status", "done"),
-    supabase.from("change_requests").select("*", { count: "exact", head: true }).eq("status", "open"),
-    supabase.from("tasks").select("*", { count: "exact", head: true }).eq("status", "done"),
-    supabase.from("activity_log").select("*").order("created_at", { ascending: false }).limit(8),
-    supabase
-      .from("milestones")
-      .select("id, title, due_date, project_id, projects(name)")
-      .neq("status", "done")
-      .order("due_date", { ascending: true, nullsFirst: false })
-      .limit(5),
-  ]);
+  const [{ count: clients }, { count: projects }, { count: openCRs }, { data: invoices }, { data: recentProjects }, { data: activity }] =
+    await Promise.all([
+      supabase.from("clients").select("*", { count: "exact", head: true }),
+      supabase.from("projects").select("*", { count: "exact", head: true }),
+      supabase.from("change_requests").select("*", { count: "exact", head: true }).eq("status", "open"),
+      supabase.from("invoices").select("amount, status"),
+      supabase.from("projects").select("id, name, status, client:clients(name)").order("created_at", { ascending: false }).limit(6),
+      supabase.from("activity_log").select("*").order("created_at", { ascending: false }).limit(8),
+    ]);
+
+  const outstanding = (invoices ?? []).filter((i) => i.status === "sent" || i.status === "overdue").reduce((s, i) => s + Number(i.amount), 0);
 
   const stats = [
-    { label: "Active clients", value: clientCount ?? 0, icon: Users, href: "/admin/clients" },
-    { label: "Active projects", value: projectCount ?? 0, icon: FolderKanban, href: "/admin/projects" },
-    { label: "Open requests", value: openChangeRequests ?? 0, icon: Inbox, href: "/admin/change-requests" },
-    { label: "Tasks completed", value: completedTasks ?? 0, icon: CheckCircle2, href: "/admin/projects" },
+    { label: "Clients", value: String(clients ?? 0), icon: Users, href: "/admin/clients" },
+    { label: "Projects", value: String(projects ?? 0), icon: FolderKanban, href: "/admin/projects" },
+    { label: "Open requests", value: String(openCRs ?? 0), icon: Inbox, href: "/admin/change-requests" },
+    { label: "Outstanding", value: formatCurrency(outstanding, "AED"), icon: Receipt, href: "/admin/invoices" },
   ];
 
   return (
     <div className="container-wide py-10">
-      <PageHeader
-        title="Dashboard"
-        description="The view across every client and every project."
-        actions={
-          <Button asChild>
-            <Link href="/admin/clients/new">
-              Add client <ArrowUpRight className="h-4 w-4" />
-            </Link>
-          </Button>
-        }
-      />
+      <PageHeader title="Control center" description="Everything across the studio, at a glance." />
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {stats.map((s) => (
-          <Link key={s.label} href={s.href} className="group">
-            <Card className="p-5 hover:border-gold/40 transition-colors h-full">
-              <div className="flex items-center justify-between">
-                <div className="text-xs uppercase tracking-[0.18em] text-ink-subtle">{s.label}</div>
-                <s.icon className="h-4 w-4 text-gold opacity-50 group-hover:opacity-100 transition-opacity" />
-              </div>
-              <div className="mt-3 font-serif text-4xl">{s.value}</div>
-            </Card>
+          <Link key={s.label} href={s.href} className="glass rounded-2xl p-5 hover:border-white/20 transition-colors group">
+            <div className="flex items-center justify-between">
+              <s.icon className="h-5 w-5 text-ink-muted" />
+              <ArrowUpRight className="h-4 w-4 text-ink-subtle group-hover:text-neon-cyan transition-colors" />
+            </div>
+            <div className="mt-4 font-serif text-3xl">{s.value}</div>
+            <div className="text-xs uppercase tracking-wider text-ink-subtle mt-1">{s.label}</div>
           </Link>
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-[1.4fr_1fr] gap-6">
-        <Card className="p-6">
-          <div className="flex items-center justify-between mb-5">
-            <h2 className="font-serif text-xl">Recent activity</h2>
-            <Badge variant="secondary">Live</Badge>
-          </div>
-          {(recentActivity?.length ?? 0) === 0 ? (
-            <div className="py-10 text-center text-sm text-ink-subtle">
-              <Activity className="h-8 w-8 mx-auto mb-3 opacity-40" />
-              No activity yet. Once you create a client and project, this feed will fill up.
-            </div>
-          ) : (
-            <ul className="space-y-3">
-              {recentActivity?.map((a) => (
-                <li key={a.id} className="flex items-start gap-3 text-sm">
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-gold shrink-0" />
-                  <div className="flex-1">
-                    <span className="text-ink">{a.action}</span>
-                    <span className="text-ink-subtle"> · {a.entity_type}</span>
+      <div className="grid lg:grid-cols-2 gap-6">
+        <div>
+          <h2 className="font-serif text-xl mb-3">Recent projects</h2>
+          <div className="space-y-2">
+            {(recentProjects ?? []).map((p) => {
+              const cn = (p as { client?: { name?: string } }).client?.name ?? "—";
+              return (
+                <Link key={p.id} href={`/admin/projects/${p.id}`} className="glass rounded-xl p-4 flex items-center justify-between hover:border-white/20 transition-colors">
+                  <div>
+                    <div className="font-medium">{p.name}</div>
+                    <div className="text-xs text-ink-subtle">{cn}</div>
                   </div>
-                  <span className="text-xs text-ink-subtle shrink-0">{formatRelativeTime(a.created_at)}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </Card>
+                  <Badge variant="secondary">{p.status}</Badge>
+                </Link>
+              );
+            })}
+            {(recentProjects ?? []).length === 0 && <p className="text-sm text-ink-subtle">No projects yet.</p>}
+          </div>
+        </div>
 
-        <Card className="p-6">
-          <h2 className="font-serif text-xl mb-5">Upcoming milestones</h2>
-          {(upcomingMilestones?.length ?? 0) === 0 ? (
-            <div className="py-10 text-center text-sm text-ink-subtle">No upcoming milestones.</div>
-          ) : (
-            <ul className="space-y-3">
-              {upcomingMilestones?.map((m) => {
-                const proj = (m as { projects: { name: string } | { name: string }[] | null }).projects;
-                const projName = Array.isArray(proj) ? proj[0]?.name : proj?.name;
-                return (
-                  <li key={m.id} className="flex items-center justify-between gap-3">
-                    <Link
-                      href={`/admin/projects/${m.project_id}`}
-                      className="flex-1 min-w-0 hover:text-gold transition-colors"
-                    >
-                      <div className="text-sm truncate">{m.title}</div>
-                      <div className="text-xs text-ink-subtle truncate">{projName ?? "Project"}</div>
-                    </Link>
-                    {m.due_date && (
-                      <Badge variant="outline" className="shrink-0 text-[10px]">
-                        {new Date(m.due_date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                      </Badge>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </Card>
+        <div>
+          <h2 className="font-serif text-xl mb-3 flex items-center gap-2"><Activity className="h-4 w-4 text-neon-cyan" /> Activity</h2>
+          <div className="glass rounded-2xl p-5 space-y-3">
+            {(activity ?? []).map((a) => (
+              <div key={a.id} className="flex items-start gap-3 text-sm">
+                <div className="h-1.5 w-1.5 rounded-full bg-iridescent mt-1.5 shrink-0" />
+                <div className="flex-1">
+                  <span className="text-ink-muted">{a.action}</span>
+                  <span className="text-ink-subtle text-xs block">{formatRelativeTime(a.created_at)}</span>
+                </div>
+              </div>
+            ))}
+            {(activity ?? []).length === 0 && <p className="text-sm text-ink-subtle">No activity yet.</p>}
+          </div>
+        </div>
       </div>
     </div>
   );

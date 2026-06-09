@@ -1,126 +1,44 @@
 "use client";
 
 import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
-import { Loader2, RefreshCw } from "lucide-react";
-import { toast } from "sonner";
-import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 import { createClientAction, type NewClientFormState } from "@/app/actions";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Separator } from "@/components/ui/separator";
 
-function generatePassword() {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$";
-  let out = "";
-  for (let i = 0; i < 14; i++) out += chars[Math.floor(Math.random() * chars.length)];
-  return out;
-}
+const initial: NewClientFormState = {};
 
-function SubmitBtn() {
-  const { pending } = useFormStatus();
+export function NewClientForm() {
+  const [state, action, pending] = useActionState(createClientAction, initial);
+
   return (
-    <Button type="submit" disabled={pending} size="lg">
-      {pending ? (
-        <>
-          <Loader2 className="h-4 w-4 animate-spin" /> Creating…
-        </>
-      ) : (
-        "Create client & send credentials"
-      )}
-    </Button>
+    <form action={action} className="glass rounded-2xl p-6 space-y-4 max-w-2xl">
+      {state.error && <div className="rounded-lg border border-danger/30 bg-danger/10 text-danger text-sm px-4 py-3">{state.error}</div>}
+
+      <div className="grid sm:grid-cols-2 gap-4">
+        <Field name="name" label="Client / brand name" required />
+        <Field name="company" label="Company (optional)" />
+        <Field name="contact_name" label="Primary contact name" />
+        <Field name="contact_email" label="Contact email" type="email" required />
+        <Field name="temp_password" label="Temporary password" type="text" required hint="Min 8 characters — share securely" />
+        <Field name="project_name" label="Starter project (optional)" hint="Seeds milestones + a checklist" />
+      </div>
+
+      <Button type="submit" disabled={pending}>
+        {pending ? <><Loader2 className="h-4 w-4 animate-spin" /> Creating…</> : "Create client + login"}
+      </Button>
+      <p className="text-xs text-ink-subtle">
+        This provisions a real login for the client. Requires <code className="text-ink-muted">SUPABASE_SERVICE_ROLE_KEY</code> in <code className="text-ink-muted">.env.local</code>.
+      </p>
+    </form>
   );
 }
 
-export function NewClientForm() {
-  const [state, formAction] = useActionState<NewClientFormState, FormData>(createClientAction, {});
-  const [password, setPassword] = useState("");
-
-  useEffect(() => {
-    setPassword(generatePassword());
-  }, []);
-
-  useEffect(() => {
-    if (state.error) toast.error(state.error);
-  }, [state]);
-
+function Field({ name, label, type = "text", required, hint }: { name: string; label: string; type?: string; required?: boolean; hint?: string }) {
   return (
-    <form action={formAction} className="space-y-8">
-      <section>
-        <h3 className="font-serif text-lg mb-4">Client organization</h3>
-        <div className="grid sm:grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="name" className="block mb-2">Display name *</Label>
-            <Input id="name" name="name" required placeholder="e.g. Nexora Labs" />
-          </div>
-          <div>
-            <Label htmlFor="company" className="block mb-2">Legal company</Label>
-            <Input id="company" name="company" placeholder="e.g. Nexora Labs FZ-LLC" />
-          </div>
-        </div>
-      </section>
-
-      <Separator />
-
-      <section>
-        <h3 className="font-serif text-lg mb-4">Primary contact</h3>
-        <div className="grid sm:grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="contact_name" className="block mb-2">Full name *</Label>
-            <Input id="contact_name" name="contact_name" required placeholder="Maya Saric" />
-          </div>
-          <div>
-            <Label htmlFor="contact_email" className="block mb-2">Email *</Label>
-            <Input id="contact_email" name="contact_email" type="email" required placeholder="maya@nexora.com" />
-          </div>
-        </div>
-        <div className="mt-4">
-          <Label htmlFor="temp_password" className="block mb-2">Temporary password *</Label>
-          <div className="flex gap-2">
-            <Input
-              id="temp_password"
-              name="temp_password"
-              required
-              minLength={8}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="font-mono text-sm"
-            />
-            <Button type="button" variant="outline" onClick={() => setPassword(generatePassword())}>
-              <RefreshCw className="h-4 w-4" />
-            </Button>
-          </div>
-          <p className="mt-2 text-xs text-ink-subtle">
-            Share this password with the client out-of-band. They&apos;ll change it on first login.
-          </p>
-        </div>
-      </section>
-
-      <Separator />
-
-      <section>
-        <h3 className="font-serif text-lg mb-4">Starter project (optional)</h3>
-        <div>
-          <Label htmlFor="project_name" className="block mb-2">Project name</Label>
-          <Input id="project_name" name="project_name" placeholder="Marketing site v2" />
-          <p className="mt-2 text-xs text-ink-subtle">
-            We&apos;ll auto-create 4 default milestones (Discovery, Design, Build, Launch) and 3 starter tasks.
-          </p>
-        </div>
-      </section>
-
-      <Separator />
-
-      <section>
-        <Label htmlFor="notes" className="block mb-2">Notes</Label>
-        <Textarea id="notes" name="notes" placeholder="Internal notes about this client…" />
-      </section>
-
-      <div className="flex justify-end">
-        <SubmitBtn />
-      </div>
-    </form>
+    <label className="block">
+      <span className="text-xs text-ink-muted">{label}{required && <span className="text-danger"> *</span>}</span>
+      <input name={name} type={type} required={required} className="mt-1 w-full bg-bg-elevated border border-white/10 rounded-lg px-3 py-2 text-sm outline-none focus:border-neon-violet/40" />
+      {hint && <span className="text-[11px] text-ink-subtle mt-1 block">{hint}</span>}
+    </label>
   );
 }

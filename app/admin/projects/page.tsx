@@ -1,63 +1,49 @@
 import Link from "next/link";
-import { ArrowUpRight, FolderKanban } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { PageHeader } from "@/components/portal/page-header";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { formatDate } from "@/lib/utils";
 
 export const metadata = { title: "Projects · Admin" };
 
-export default async function ProjectsListPage() {
+export default async function AdminProjects() {
   const supabase = await createClient();
   const { data: projects } = await supabase
     .from("projects")
-    .select("*, clients(name)")
+    .select("id, name, status, currency, budget_total, client:clients(name), features(status)")
     .order("created_at", { ascending: false });
 
   return (
     <div className="container-wide py-10">
-      <PageHeader
-        title="Projects"
-        description={`${projects?.length ?? 0} project${(projects?.length ?? 0) === 1 ? "" : "s"} across all clients.`}
-      />
-
-      {(projects?.length ?? 0) === 0 ? (
-        <Card className="p-16 text-center">
-          <FolderKanban className="h-12 w-12 mx-auto text-ink-subtle opacity-40 mb-4" />
-          <h3 className="font-serif text-2xl">No projects yet</h3>
-          <p className="mt-2 text-sm text-ink-muted">
-            Add a client first — you can spin up their starter project at the same time.
-          </p>
-        </Card>
-      ) : (
-        <div className="grid lg:grid-cols-2 gap-4">
-          {projects!.map((p) => {
-            const client = (p as typeof p & { clients: { name: string } | { name: string }[] | null }).clients;
-            const clientName = Array.isArray(client) ? client[0]?.name : client?.name;
-            return (
-              <Link key={p.id} href={`/admin/projects/${p.id}`} className="group">
-                <Card className="p-6 hover:border-gold/40 transition-all hover:-translate-y-0.5 h-full">
-                  <div className="flex items-start justify-between">
-                    <div className="min-w-0">
-                      <p className="text-xs uppercase tracking-[0.2em] text-ink-subtle">{clientName ?? "Client"}</p>
-                      <h3 className="mt-1 font-serif text-2xl truncate">{p.name}</h3>
-                    </div>
-                    <Badge variant={p.status === "done" ? "success" : "default"}>{p.status}</Badge>
-                  </div>
-                  {p.description && (
-                    <p className="mt-4 text-sm text-ink-muted line-clamp-2">{p.description}</p>
-                  )}
-                  <div className="mt-6 flex items-center justify-between text-xs text-ink-subtle">
-                    <span>Started {formatDate(p.start_date ?? p.created_at)}</span>
-                    <ArrowUpRight className="h-4 w-4 group-hover:text-gold transition-colors" />
-                  </div>
-                </Card>
-              </Link>
-            );
-          })}
-        </div>
-      )}
+      <PageHeader title="Projects" description="Every engagement across the studio." />
+      <div className="grid md:grid-cols-2 gap-4">
+        {(projects ?? []).map((p) => {
+          const feats = ((p as { features?: { status: string }[] }).features ?? []);
+          const done = feats.filter((f) => f.status === "done").length;
+          const total = feats.filter((f) => f.status !== "wont_do").length;
+          const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+          const clientName = (p as { client?: { name?: string } }).client?.name ?? "—";
+          return (
+            <Link key={p.id} href={`/admin/projects/${p.id}`} className="glass rounded-2xl p-6 hover:border-white/20 transition-colors group">
+              <div className="flex items-start justify-between">
+                <div>
+                  <div className="font-serif text-xl">{p.name}</div>
+                  <div className="text-xs text-ink-subtle mt-0.5">{clientName}</div>
+                </div>
+                <ArrowUpRight className="h-5 w-5 text-ink-subtle group-hover:text-neon-cyan transition-colors" />
+              </div>
+              <div className="mt-4 flex items-center gap-2">
+                <Badge variant="secondary">{p.status}</Badge>
+                <span className="text-xs text-ink-subtle">{pct}% complete</span>
+              </div>
+              <div className="mt-3 h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+                <div className="h-full bg-iridescent" style={{ width: `${pct}%` }} />
+              </div>
+            </Link>
+          );
+        })}
+        {(projects ?? []).length === 0 && <p className="text-sm text-ink-subtle">No projects yet.</p>}
+      </div>
     </div>
   );
 }

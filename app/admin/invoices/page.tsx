@@ -1,47 +1,51 @@
+import Link from "next/link";
 import { Receipt } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { PageHeader } from "@/components/portal/page-header";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Badge, type BadgeProps } from "@/components/ui/badge";
+import { formatCurrency } from "@/lib/currency";
 import { formatDate } from "@/lib/utils";
 
 export const metadata = { title: "Invoices · Admin" };
 
-export default async function AdminInvoicesPage() {
+const VARIANT: Record<string, BadgeProps["variant"]> = { draft: "secondary", sent: "info", paid: "success", overdue: "danger", void: "outline" };
+
+export default async function AdminInvoices() {
   const supabase = await createClient();
   const { data: invoices } = await supabase
     .from("invoices")
-    .select("*, clients(name)")
+    .select("*, client:clients(name), project:projects(id, name)")
     .order("created_at", { ascending: false });
+
+  const paid = (invoices ?? []).filter((i) => i.status === "paid").reduce((s, i) => s + Number(i.amount), 0);
+  const due = (invoices ?? []).filter((i) => i.status === "sent" || i.status === "overdue").reduce((s, i) => s + Number(i.amount), 0);
 
   return (
     <div className="container-wide py-10">
-      <PageHeader title="Invoices" description="Track every invoice across all clients." />
-
-      {(invoices?.length ?? 0) === 0 ? (
-        <Card className="p-16 text-center">
-          <Receipt className="h-10 w-10 mx-auto text-ink-subtle opacity-40 mb-3" />
-          <h3 className="font-serif text-2xl">No invoices yet</h3>
-          <p className="mt-2 text-sm text-ink-muted">Invoice creation UI shipping in the next iteration.</p>
-        </Card>
-      ) : (
-        <Card className="divide-y divide-line overflow-hidden">
-          {invoices!.map((inv) => {
-            const client = (inv as typeof inv & { clients: { name: string } | { name: string }[] | null }).clients;
-            const clientName = Array.isArray(client) ? client[0]?.name : client?.name;
-            return (
-              <div key={inv.id} className="p-4 grid grid-cols-[1fr_1fr_auto_auto] gap-4 items-center">
-                <div className="font-mono text-sm">#{inv.number}</div>
-                <div className="text-sm">{clientName ?? "—"}</div>
-                <div className="font-mono text-sm">{inv.currency} {Number(inv.amount).toLocaleString()}</div>
-                <Badge variant={inv.status === "paid" ? "success" : inv.status === "overdue" ? "danger" : "warning"}>
-                  {inv.status}
-                </Badge>
+      <PageHeader title="Invoices" description="Create and manage invoices inside each project; this is the overview." />
+      <div className="grid sm:grid-cols-2 gap-4 mb-6">
+        <div className="glass rounded-2xl p-5"><div className="text-xs uppercase tracking-wider text-ink-subtle">Collected</div><div className="font-serif text-2xl mt-1 text-success">{formatCurrency(paid, "AED")}</div></div>
+        <div className="glass rounded-2xl p-5"><div className="text-xs uppercase tracking-wider text-ink-subtle">Outstanding</div><div className="font-serif text-2xl mt-1 text-warning">{formatCurrency(due, "AED")}</div></div>
+      </div>
+      <div className="space-y-2">
+        {(invoices ?? []).map((inv) => {
+          const proj = (inv as { project?: { id: string; name: string } }).project;
+          const clientName = (inv as { client?: { name?: string } }).client?.name ?? "—";
+          return (
+            <div key={inv.id} className="glass rounded-xl p-4 flex items-center gap-4 flex-wrap">
+              <div className="h-10 w-10 rounded-lg glass grid place-items-center"><Receipt className="h-4 w-4 text-ink-muted" /></div>
+              <div className="flex-1 min-w-0">
+                <div className="font-mono text-sm">{inv.number}</div>
+                <div className="text-xs text-ink-subtle">{clientName}{proj && <> · <Link href={`/admin/projects/${proj.id}`} className="hover:text-neon-cyan">{proj.name}</Link></>}</div>
               </div>
-            );
-          })}
-        </Card>
-      )}
+              {inv.due_at && <span className="text-xs text-ink-subtle">Due {formatDate(inv.due_at)}</span>}
+              <Badge variant={VARIANT[inv.status]}>{inv.status}</Badge>
+              <div className="font-mono text-sm w-28 text-right">{formatCurrency(Number(inv.amount), inv.currency)}</div>
+            </div>
+          );
+        })}
+        {(invoices ?? []).length === 0 && <p className="text-sm text-ink-subtle">No invoices yet.</p>}
+      </div>
     </div>
   );
 }

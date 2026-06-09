@@ -1,12 +1,9 @@
 import Link from "next/link";
-import { ArrowUpRight, FolderKanban, Inbox, MessageCircle, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, Activity, Sparkles } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { PageHeader } from "@/components/portal/page-header";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Button } from "@/components/ui/button";
-import { formatDate, formatRelativeTime } from "@/lib/utils";
+import { formatRelativeTime } from "@/lib/utils";
 
 export const metadata = { title: "Dashboard · Client" };
 
@@ -16,119 +13,72 @@ export default async function ClientDashboard() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data: profile } = await supabase.from("profiles").select("full_name").eq("id", user!.id).single();
+  const { data: profile } = await supabase.from("profiles").select("full_name").eq("id", user?.id ?? "").single();
+  const { data: projects } = await supabase
+    .from("projects")
+    .select("id, name, status, features(status)")
+    .order("created_at", { ascending: false });
+  const { data: activity } = await supabase.from("activity_log").select("*").order("created_at", { ascending: false }).limit(8);
 
-  const [{ data: projects }, { data: tasks }, { data: openCRs }, { data: recentActivity }] = await Promise.all([
-    supabase.from("projects").select("*").order("created_at", { ascending: false }),
-    supabase.from("tasks").select("id, status, project_id"),
-    supabase.from("change_requests").select("id").eq("status", "open"),
-    supabase.from("activity_log").select("*").order("created_at", { ascending: false }).limit(8),
-  ]);
-
-  const totalTasks = tasks?.length ?? 0;
-  const doneTasks = tasks?.filter((t) => t.status === "done").length ?? 0;
-  const activeProjects = projects?.filter((p) => p.status !== "done").length ?? 0;
+  const firstName = (profile?.full_name ?? "there").split(" ")[0];
 
   return (
     <div className="container-wide py-10">
       <PageHeader
-        title={`Welcome${profile?.full_name ? `, ${profile.full_name.split(" ")[0]}` : ""}`}
-        description="Here&apos;s the live state of everything we&apos;re building for you."
+        title={<span>Welcome back, <span className="iridescent-text">{firstName}</span></span>}
+        description="Here's where your work stands."
       />
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-        <Card className="p-5">
-          <div className="flex items-center justify-between">
-            <div className="text-xs uppercase tracking-[0.18em] text-ink-subtle">Active projects</div>
-            <FolderKanban className="h-4 w-4 text-gold opacity-50" />
-          </div>
-          <div className="mt-3 font-serif text-4xl">{activeProjects}</div>
-        </Card>
-        <Card className="p-5">
-          <div className="flex items-center justify-between">
-            <div className="text-xs uppercase tracking-[0.18em] text-ink-subtle">Tasks done</div>
-            <CheckCircle2 className="h-4 w-4 text-gold opacity-50" />
-          </div>
-          <div className="mt-3 font-serif text-4xl">{doneTasks}<span className="text-ink-subtle text-lg">/{totalTasks}</span></div>
-        </Card>
-        <Card className="p-5">
-          <div className="flex items-center justify-between">
-            <div className="text-xs uppercase tracking-[0.18em] text-ink-subtle">Open requests</div>
-            <Inbox className="h-4 w-4 text-gold opacity-50" />
-          </div>
-          <div className="mt-3 font-serif text-4xl">{openCRs?.length ?? 0}</div>
-        </Card>
-        <Card className="p-5">
-          <div className="flex items-center justify-between">
-            <div className="text-xs uppercase tracking-[0.18em] text-ink-subtle">Messages</div>
-            <MessageCircle className="h-4 w-4 text-gold opacity-50" />
-          </div>
-          <div className="mt-3 font-serif text-4xl">—</div>
-        </Card>
-      </div>
-
-      <div className="grid lg:grid-cols-[1.4fr_1fr] gap-6">
-        <Card className="p-6">
-          <h2 className="font-serif text-xl mb-5">Your projects</h2>
-          {(projects?.length ?? 0) === 0 ? (
-            <div className="py-12 text-center text-sm text-ink-subtle">
-              No projects yet — your team will set you up shortly.
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {projects!.map((p) => {
-                const projTasks = tasks?.filter((t) => t.project_id === p.id) ?? [];
-                const projDone = projTasks.filter((t) => t.status === "done").length;
-                const pct = projTasks.length === 0 ? 0 : Math.round((projDone / projTasks.length) * 100);
-                return (
-                  <Link key={p.id} href={`/client/projects/${p.id}`} className="group block">
-                    <div className="p-4 rounded-xl border border-line bg-bg-elevated/40 hover:border-gold/40 transition-colors">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="min-w-0">
-                          <h3 className="font-serif text-lg">{p.name}</h3>
-                          {p.description && (
-                            <p className="mt-1 text-xs text-ink-subtle line-clamp-2">{p.description}</p>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-2 shrink-0">
-                          <Badge variant={p.status === "done" ? "success" : "default"}>{p.status}</Badge>
-                          <ArrowUpRight className="h-4 w-4 text-ink-subtle group-hover:text-gold transition-colors" />
-                        </div>
-                      </div>
-                      <div className="mt-4 flex items-center gap-3">
-                        <Progress value={pct} className="flex-1" />
-                        <span className="text-xs text-ink-muted shrink-0 font-mono">{pct}%</span>
-                      </div>
-                      <div className="mt-2 text-[10px] uppercase tracking-wider text-ink-subtle">
-                        {projDone} of {projTasks.length} tasks done
-                        {p.target_date && ` · target ${formatDate(p.target_date)}`}
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          )}
-        </Card>
-
-        <Card className="p-6">
-          <h2 className="font-serif text-xl mb-5">Recent activity</h2>
-          {(recentActivity?.length ?? 0) === 0 ? (
-            <p className="py-8 text-center text-sm text-ink-subtle">No activity yet</p>
-          ) : (
-            <ul className="space-y-3 text-sm">
-              {recentActivity!.map((a) => (
-                <li key={a.id} className="flex items-start gap-3">
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-gold shrink-0" />
-                  <div className="flex-1 min-w-0">
-                    <div className="text-ink truncate">{a.action}</div>
-                    <div className="text-xs text-ink-subtle">{formatRelativeTime(a.created_at)}</div>
+      <div className="grid lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2 space-y-4">
+          <h2 className="font-serif text-xl">Your projects</h2>
+          {(projects ?? []).map((p) => {
+            const feats = ((p as { features?: { status: string }[] }).features ?? []);
+            const done = feats.filter((f) => f.status === "done").length;
+            const total = feats.filter((f) => f.status !== "wont_do").length;
+            const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+            return (
+              <Link key={p.id} href={`/client/projects/${p.id}`} className="glass rounded-2xl p-6 block hover:border-white/20 transition-colors group">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <div className="font-serif text-xl">{p.name}</div>
+                    <Badge variant="secondary" className="mt-2">{p.status}</Badge>
                   </div>
-                </li>
-              ))}
-            </ul>
+                  <ArrowUpRight className="h-5 w-5 text-ink-subtle group-hover:text-neon-cyan transition-colors" />
+                </div>
+                <div className="mt-4 flex items-center justify-between text-sm">
+                  <span className="text-ink-subtle">{done} of {total} done</span>
+                  <span className="iridescent-text font-medium">{pct}%</span>
+                </div>
+                <div className="mt-2 h-2 w-full rounded-full bg-white/10 overflow-hidden">
+                  <div className="h-full bg-iridescent transition-all duration-700" style={{ width: `${pct}%` }} />
+                </div>
+              </Link>
+            );
+          })}
+          {(projects ?? []).length === 0 && (
+            <div className="glass rounded-2xl p-12 text-center">
+              <Sparkles className="h-9 w-9 mx-auto text-ink-subtle opacity-40 mb-3" />
+              <p className="text-sm text-ink-muted">No projects yet — your studio will set things up shortly.</p>
+            </div>
           )}
-        </Card>
+        </div>
+
+        <div>
+          <h2 className="font-serif text-xl mb-3 flex items-center gap-2"><Activity className="h-4 w-4 text-neon-cyan" /> Recent activity</h2>
+          <div className="glass rounded-2xl p-5 space-y-3">
+            {(activity ?? []).map((a) => (
+              <div key={a.id} className="flex items-start gap-3 text-sm">
+                <div className="h-1.5 w-1.5 rounded-full bg-iridescent mt-1.5 shrink-0" />
+                <div className="flex-1">
+                  <span className="text-ink-muted">{a.action}</span>
+                  <span className="text-ink-subtle text-xs block">{formatRelativeTime(a.created_at)}</span>
+                </div>
+              </div>
+            ))}
+            {(activity ?? []).length === 0 && <p className="text-sm text-ink-subtle">Nothing yet.</p>}
+          </div>
+        </div>
       </div>
     </div>
   );

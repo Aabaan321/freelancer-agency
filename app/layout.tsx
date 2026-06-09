@@ -2,6 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Playfair_Display, DM_Sans, JetBrains_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { SITE } from "@/lib/config";
+import { AuroraBackground } from "@/components/fx/aurora-background";
+import { Loader } from "@/components/fx/loader";
+import { SmoothScroll } from "@/components/motion/smooth-scroll";
+import { ScrollProgress } from "@/components/motion/scroll-progress";
 import "./globals.css";
 
 const serif = Playfair_Display({
@@ -47,6 +51,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable} dark`} suppressHydrationWarning>
       <body className="grain min-h-screen">
+        <AuroraBackground />
+        <Loader />
+        <SmoothScroll />
+        <ScrollProgress />
         {children}
         <Toaster richColors position="top-center" />
       </body>

@@ -70,7 +70,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="inline-flex items-center gap-2 rounded-full border border-line bg-bg-elevated/60 backdrop-blur-sm px-3 py-1.5 text-xs text-ink-muted"
+          className="glass inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs text-ink-muted"
         >
           <Sparkles className="h-3 w-3 text-gold" />
           <span>Boutique digital studio · Est. {SITE.business.foundedYear}</span>
@@ -79,7 +79,7 @@ export function Hero() {
         <h1 className="mt-6 font-serif text-balance tracking-[-0.02em] leading-[0.95] text-5xl sm:text-6xl md:text-7xl lg:text-[6.5rem]">
           <SplitText text="Design with intent." as="span" />
           <br />
-          <SplitText text="Build with care." as="span" delayChildren={0.4} className="gold-text" />
+          <SplitText text="Build with care." as="span" delayChildren={0.4} className="iridescent-text" />
           <br />
           <SplitText text="Ship without compromise." as="span" delayChildren={0.8} />
         </h1>

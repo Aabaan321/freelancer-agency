@@ -30,6 +30,13 @@ const config: Config = {
           muted: "hsl(var(--gold-muted))",
           dim: "hsl(var(--gold-dim))",
         },
+        // Neon / iridescent accent set (the "mix of all" palette)
+        neon: {
+          cyan: "hsl(var(--neon-cyan))",
+          violet: "hsl(var(--neon-violet))",
+          magenta: "hsl(var(--neon-magenta))",
+          lime: "hsl(var(--neon-lime))",
+        },
         line: "hsl(var(--line))",
         success: "hsl(var(--success))",
         warning: "hsl(var(--warning))",
@@ -41,34 +48,13 @@ const config: Config = {
         ring: "hsl(var(--gold))",
         background: "hsl(var(--bg))",
         foreground: "hsl(var(--ink))",
-        primary: {
-          DEFAULT: "hsl(var(--gold))",
-          foreground: "hsl(var(--bg))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--bg-elevated))",
-          foreground: "hsl(var(--ink))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--bg-subtle))",
-          foreground: "hsl(var(--ink-muted))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--gold-dim))",
-          foreground: "hsl(var(--ink))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--danger))",
-          foreground: "hsl(0 0% 100%)",
-        },
-        card: {
-          DEFAULT: "hsl(var(--bg-elevated))",
-          foreground: "hsl(var(--ink))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--bg-elevated))",
-          foreground: "hsl(var(--ink))",
-        },
+        primary: { DEFAULT: "hsl(var(--gold))", foreground: "hsl(var(--bg))" },
+        secondary: { DEFAULT: "hsl(var(--bg-elevated))", foreground: "hsl(var(--ink))" },
+        muted: { DEFAULT: "hsl(var(--bg-subtle))", foreground: "hsl(var(--ink-muted))" },
+        accent: { DEFAULT: "hsl(var(--gold-dim))", foreground: "hsl(var(--ink))" },
+        destructive: { DEFAULT: "hsl(var(--danger))", foreground: "hsl(0 0% 100%)" },
+        card: { DEFAULT: "hsl(var(--bg-elevated))", foreground: "hsl(var(--ink))" },
+        popover: { DEFAULT: "hsl(var(--bg-elevated))", foreground: "hsl(var(--ink))" },
       },
       fontFamily: {
         serif: ["var(--font-serif)", "Playfair Display", "serif"],
@@ -76,40 +62,45 @@ const config: Config = {
         mono: ["var(--font-mono)", "JetBrains Mono", "monospace"],
       },
       borderRadius: {
+        "2xl": "calc(var(--radius) + 8px)",
+        xl: "calc(var(--radius) + 4px)",
         lg: "var(--radius)",
         md: "calc(var(--radius) - 4px)",
         sm: "calc(var(--radius) - 8px)",
       },
       backgroundImage: {
         "gold-gradient": "linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(45 70% 70%) 50%, hsl(var(--gold)) 100%)",
-        "mesh-gold": "radial-gradient(ellipse 80% 50% at 50% -20%, hsla(43, 55%, 54%, 0.3), transparent), radial-gradient(ellipse 60% 50% at 80% 50%, hsla(43, 55%, 54%, 0.15), transparent)",
+        "iridescent": "linear-gradient(115deg, hsl(var(--neon-violet)) 0%, hsl(var(--neon-cyan)) 30%, hsl(var(--gold)) 55%, hsl(var(--neon-magenta)) 80%, hsl(var(--neon-violet)) 100%)",
+        "chrome": "linear-gradient(180deg, hsla(0,0%,100%,0.9) 0%, hsla(220,15%,70%,0.55) 18%, hsla(220,20%,30%,0.35) 50%, hsla(220,15%,75%,0.5) 82%, hsla(0,0%,100%,0.85) 100%)",
+        "aurora": "radial-gradient(40% 60% at 20% 20%, hsla(var(--neon-violet),0.35), transparent 60%), radial-gradient(40% 50% at 80% 10%, hsla(var(--neon-cyan),0.28), transparent 60%), radial-gradient(50% 60% at 60% 90%, hsla(var(--gold),0.25), transparent 60%), radial-gradient(40% 40% at 10% 80%, hsla(var(--neon-magenta),0.22), transparent 60%)",
+        "mesh-gold": "radial-gradient(ellipse 80% 50% at 50% -20%, hsla(43,55%,54%,0.3), transparent), radial-gradient(ellipse 60% 50% at 80% 50%, hsla(43,55%,54%,0.15), transparent)",
         "grain": "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.25'/%3E%3C/svg%3E\")",
       },
+      boxShadow: {
+        glass: "0 8px 32px -8px rgba(0,0,0,0.6), inset 0 1px 0 0 hsla(0,0%,100%,0.08)",
+        "glow-gold": "0 0 0 1px hsl(var(--gold)/0.2), 0 0 40px -4px hsl(var(--gold)/0.35)",
+        "glow-cyan": "0 0 40px -4px hsl(var(--neon-cyan)/0.5)",
+        "glow-violet": "0 0 40px -4px hsl(var(--neon-violet)/0.5)",
+      },
       keyframes: {
-        "fade-in": {
-          from: { opacity: "0", transform: "translateY(8px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
+        "fade-in": { from: { opacity: "0", transform: "translateY(8px)" }, to: { opacity: "1", transform: "translateY(0)" } },
+        "fade-up": { from: { opacity: "0", transform: "translateY(40px)" }, to: { opacity: "1", transform: "translateY(0)" } },
+        shimmer: { "0%": { backgroundPosition: "-200% 0" }, "100%": { backgroundPosition: "200% 0" } },
+        marquee: { "0%": { transform: "translateX(0)" }, "100%": { transform: "translateX(-50%)" } },
+        "pulse-ring": { "0%": { transform: "scale(0.8)", opacity: "0.8" }, "100%": { transform: "scale(2)", opacity: "0" } },
+        "gradient-x": { "0%, 100%": { backgroundPosition: "0% 50%" }, "50%": { backgroundPosition: "100% 50%" } },
+        "aurora-drift": {
+          "0%, 100%": { transform: "translate3d(0,0,0) rotate(0deg) scale(1)" },
+          "33%": { transform: "translate3d(4%,-3%,0) rotate(8deg) scale(1.1)" },
+          "66%": { transform: "translate3d(-3%,4%,0) rotate(-6deg) scale(0.95)" },
         },
-        "fade-up": {
-          from: { opacity: "0", transform: "translateY(40px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
+        float: { "0%, 100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-14px)" } },
+        "spin-slow": { to: { transform: "rotate(360deg)" } },
+        "blob": {
+          "0%, 100%": { borderRadius: "42% 58% 70% 30% / 45% 45% 55% 55%" },
+          "50%": { borderRadius: "60% 40% 35% 65% / 55% 60% 40% 45%" },
         },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
-        marquee: {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
-        "pulse-ring": {
-          "0%": { transform: "scale(0.8)", opacity: "0.8" },
-          "100%": { transform: "scale(2)", opacity: "0" },
-        },
-        "gradient-x": {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
-        },
+        "text-shimmer": { "0%": { backgroundPosition: "0% 50%" }, "100%": { backgroundPosition: "200% 50%" } },
       },
       animation: {
         "fade-in": "fade-in 0.5s ease-out",
@@ -118,6 +109,11 @@ const config: Config = {
         marquee: "marquee 40s linear infinite",
         "pulse-ring": "pulse-ring 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "gradient-x": "gradient-x 6s ease infinite",
+        "aurora-drift": "aurora-drift 18s ease-in-out infinite",
+        float: "float 6s ease-in-out infinite",
+        "spin-slow": "spin-slow 24s linear infinite",
+        blob: "blob 12s ease-in-out infinite",
+        "text-shimmer": "text-shimmer 4s linear infinite",
       },
     },
   },
